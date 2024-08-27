@@ -20,8 +20,6 @@ GoogleSignin.configure({
 function App(): React.JSX.Element {
   const [credentials] = useCredentials();
 
-  console.log(credentials);
-
   return (
     <QueryClientProvider client={queryClient}>
       <StatusBar barStyle="dark-content" />
