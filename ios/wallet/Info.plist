@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>wallet</string>
+	<string>Wallet</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -20,6 +20,15 @@
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.933758472213-66j0oji0cs6tmg054hd83smorsi85v5p</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
@@ -49,9 +58,9 @@
 	<false/>
 	<key>UIAppFonts</key>
 	<array>
-		<string>InterBold.ttf</string>
 		<string>InterMedium.ttf</string>
 		<string>InterRegular.ttf</string>
+		<string>InterSemiBold.ttf</string>
 	</array>
 </dict>
 </plist>
