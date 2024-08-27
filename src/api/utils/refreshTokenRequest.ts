@@ -1,11 +1,11 @@
 import axios, {AxiosRequestConfig} from 'axios';
 import {API_BASE_URL} from 'config/config';
-import {applyAuthInterceptors} from './authInterceptor';
 
 const axiosInstance = axios.create();
-applyAuthInterceptors(axiosInstance);
 
-export const backendRequest = <T>(config: AxiosRequestConfig): Promise<T> => {
+export const refreshTokenRequest = <T>(
+  config: AxiosRequestConfig,
+): Promise<T> => {
   const source = axios.CancelToken.source();
   const promise = axiosInstance({
     ...config,
@@ -16,7 +16,7 @@ export const backendRequest = <T>(config: AxiosRequestConfig): Promise<T> => {
     .then(({data}) => data)
     .catch(error => {
       if (axios.isAxiosError(error)) {
-        return Promise.reject(error);
+        return Promise.reject(error.response?.data);
       }
       return Promise.reject(null);
     });

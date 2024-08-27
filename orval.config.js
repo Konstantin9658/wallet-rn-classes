@@ -1,7 +1,7 @@
 module.exports = {
   backend: {
     input: {
-      target: './swaggers/backend/swagger.json',
+      target: './swagger.json',
     },
     output: {
       mode: 'split',
@@ -13,6 +13,14 @@ module.exports = {
         mutator: {
           path: './src/api/utils/backendRequest.ts',
           name: 'backendRequest',
+        },
+      },
+      operations: {
+        RefreshToken: {
+          mutator: {
+            path: './src/api/utils/refreshTokenRequest.ts',
+            name: 'refreshTokenRequest',
+          },
         },
       },
     },
