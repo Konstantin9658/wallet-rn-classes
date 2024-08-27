@@ -1,13 +1,14 @@
+import { Colors } from 'constants/Colors';
+import { FontFamilies } from 'constants/Fonts';
+import { FontSize, LineHeight } from 'constants/Typography';
 import {StyleSheet} from 'react-native';
-import {Colors} from '../../constants/Colors';
-import {FontSize, LineHeight} from '../../constants/Typography';
-import {FontFamilies} from '../../constants/Fonts';
 
 export const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 16,
     height: 60,
     width: '100%',
+    zIndex: 1,
     alignItems: 'center',
     justifyContent: 'space-between',
     backgroundColor: Colors.white100,
@@ -16,7 +17,7 @@ export const styles = StyleSheet.create({
     shadowRadius: 12,
     shadowOffset: {
       width: 0,
-      height: 10,
+      height: 15,
     },
     shadowOpacity: 0.06,
   },
