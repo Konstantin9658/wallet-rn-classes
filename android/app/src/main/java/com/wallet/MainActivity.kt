@@ -1,4 +1,4 @@
-package com.wallet
+package com.mercdevstore
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate
