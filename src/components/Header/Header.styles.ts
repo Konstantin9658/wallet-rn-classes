@@ -13,6 +13,8 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
     backgroundColor: Colors.white100,
     flexDirection: 'row',
+    borderTopWidth: 1,
+    borderTopColor: Colors.neutral20,
     shadowColor: Colors.black100,
     shadowRadius: 12,
     shadowOffset: {

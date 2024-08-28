@@ -1,30 +1,35 @@
 import React from "react";
 import { Image, ScrollView, Text, View } from "react-native";
+import { commonStyles } from "../common.styles";
 import { Input } from "components/Input/Input";
 import { Button } from "components/Button/Button";
-import { commonStyles } from "screens/common.styles";
+import IconQR from "./images/qr.svg";
 
-export const HomeScreen = () => {
+export const RequestMercoinsScreen = () => {
   return (
     <ScrollView automaticallyAdjustKeyboardInsets>
       <View style={commonStyles.container}>
         <Image
           style={commonStyles.image}
-          source={require("./images/i120_mercoin.png")}
+          source={require("./images/i120_qr.png")}
         />
-        <Text style={commonStyles.title}>Send Mercoins</Text>
+        <Text style={commonStyles.title}>Request Mercoins</Text>
         <Text style={commonStyles.description}>
-          Select a user and specify the number of&nbsp;mercoins to transfer
+          Generate QR-code and grab money.
         </Text>
         <View style={commonStyles.inputContainer}>
-          <Input placeholder="Enter user name or E-mail" />
           <Input
             placeholder="Amount of mercoins"
             inputMode="numeric"
             keyboardType="numeric"
           />
         </View>
-        <Button label="Send mercoins" isDisabled style={commonStyles.button} />
+        <Button
+          label="Generate QR"
+          IconComponent={IconQR}
+          isDisabled
+          style={commonStyles.button}
+        />
       </View>
     </ScrollView>
   );
