@@ -31,7 +31,6 @@ export const styles = StyleSheet.create({
   },
   balance: {
     fontFamily: FontFamilies.INTER.medium,
-    fontWeight: 700,
     fontSize: FontSize.fs16,
     lineHeight: LineHeight.lh24,
     color: Colors.dark80,

@@ -1,4 +1,4 @@
-package com.wallet
+package com.mercdevstore
 
 import android.app.Application
 import com.facebook.react.PackageList

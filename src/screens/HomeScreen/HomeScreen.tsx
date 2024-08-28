@@ -3,14 +3,8 @@ import {Image, Text, View} from 'react-native';
 import {styles} from './HomeScreen.styles';
 import {Input} from 'components/Input/Input';
 import {Button} from 'components/Button/Button';
-import {useCredentials} from 'services/credentials';
-import {LoginScreen} from 'screens/LoginScreen/LoginScreen';
 
 export const HomeScreen = () => {
-  const [credentials] = useCredentials();
-  if (!credentials) {
-    return <LoginScreen />;
-  }
   return (
     <View style={styles.container}>
       <Image
