@@ -1,12 +1,17 @@
-import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import React from 'react';
-import {SafeAreaView, ScrollView, StatusBar} from 'react-native';
+import { SafeAreaView, ScrollView, StatusBar } from 'react-native';
 import Header from './src/components/Header/Header';
-import {GoogleSignin} from '@react-native-google-signin/google-signin';
-import {useCredentials} from 'services/credentials';
-import {LoginScreen} from 'screens/LoginScreen/LoginScreen';
-import {HomeScreen} from 'screens/HomeScreen/HomeScreen';
-import {Colors} from 'constants/Colors';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import { useCredentials } from 'services/credentials';
+import { LoginScreen } from 'screens/LoginScreen/LoginScreen';
+import { HomeScreen } from 'screens/HomeScreen/HomeScreen';
+import { Colors } from 'constants/Colors';
+// import TabNavigator from 'TabNavigator/TabNavigator';
+// import {SafeAreaView} from 'react-native-safe-area-context';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import TabNavigator from 'TabNavigator/TabNavigator';
 
 const queryClient = new QueryClient();
 
@@ -21,21 +26,14 @@ function App(): React.JSX.Element {
   const [credentials] = useCredentials();
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView style={{flex: 1}}>
-        {credentials ? (
-          <>
-            <Header />
-            <ScrollView style={{backgroundColor: Colors.mainBg}}>
-              <HomeScreen />
-            </ScrollView>
-          </>
-        ) : (
-          <LoginScreen />
-        )}
-      </SafeAreaView>
-    </QueryClientProvider>
+    <NavigationContainer>
+      <QueryClientProvider client={queryClient}>
+        <SafeAreaView style={{ flex: 1 }}>
+          <StatusBar barStyle="dark-content" />
+          {credentials ? <TabNavigator /> : <LoginScreen />}
+        </SafeAreaView>
+      </QueryClientProvider>
+    </NavigationContainer>
   );
 }
 
