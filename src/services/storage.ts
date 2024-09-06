@@ -1,11 +1,11 @@
-import {useEffect, useState} from 'react';
-import {MMKV} from 'react-native-mmkv';
-import {Schema} from 'yup';
+import { useEffect, useState } from "react";
+import { MMKV } from "react-native-mmkv";
+import { Schema } from "yup";
 
 const storage = new MMKV();
 
 // List of available keys for persistent storage
-type StorageKey = 'credentials';
+type StorageKey = "credentials";
 
 const storageKeyRegister = new Map<StorageKey, true>();
 
@@ -43,7 +43,9 @@ export const makeStorage = <SchemaType>(
     },
     addOnValueChangedListener(callback: (value: SchemaType | null) => void) {
       return storage.addOnValueChangedListener(key => {
-        if (key === storageKey) {return callback(this.get());}
+        if (key === storageKey) {
+          return callback(this.get());
+        }
       });
     },
   } as const;

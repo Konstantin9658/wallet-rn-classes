@@ -1,5 +1,5 @@
-import axios, {AxiosRequestConfig} from 'axios';
-import {API_BASE_URL} from 'config/config';
+import axios, { AxiosRequestConfig } from "axios";
+import { API_BASE_URL } from "config/config";
 
 const axiosInstance = axios.create();
 
@@ -13,7 +13,7 @@ export const refreshTokenRequest = <T>(
     cancelToken: source.token,
     timeout: 60000,
   })
-    .then(({data}) => data)
+    .then(({ data }) => data)
     .catch(error => {
       if (axios.isAxiosError(error)) {
         return Promise.reject(error.response?.data);
@@ -23,7 +23,7 @@ export const refreshTokenRequest = <T>(
 
   Object.assign(promise, {
     cancel: () => {
-      source.cancel('Query was cancelled by React Query');
+      source.cancel("Query was cancelled by React Query");
     },
   });
 

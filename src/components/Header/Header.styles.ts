@@ -1,18 +1,17 @@
-import { Colors } from 'constants/Colors';
-import { FontFamilies } from 'constants/Fonts';
-import { FontSize, LineHeight } from 'constants/Typography';
-import {StyleSheet} from 'react-native';
+import { Colors } from "constants/Colors";
+import { FontSize, LineHeight } from "constants/Typography";
+import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 16,
     height: 60,
-    width: '100%',
+    width: "100%",
     zIndex: 1,
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    alignItems: "center",
+    justifyContent: "space-between",
     backgroundColor: Colors.white100,
-    flexDirection: 'row',
+    flexDirection: "row",
     borderTopWidth: 1,
     borderTopColor: Colors.neutral20,
     shadowColor: Colors.black100,
@@ -28,11 +27,12 @@ export const styles = StyleSheet.create({
     height: 24,
   },
   profile: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
   balance: {
-    fontFamily: FontFamilies.INTER.medium,
+    fontFamily: "Inter",
+    fontWeight: "500",
     fontSize: FontSize.fs16,
     lineHeight: LineHeight.lh24,
     color: Colors.dark80,

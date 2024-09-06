@@ -5,7 +5,7 @@
  * MercuryHub ASP.NET Core Web API
  * OpenAPI spec version: v1
  */
-import {useMutation, useQuery} from '@tanstack/react-query';
+import { useMutation, useQuery } from "@tanstack/react-query";
 import type {
   DefinedInitialDataOptions,
   DefinedUseQueryResult,
@@ -17,7 +17,7 @@ import type {
   UseMutationResult,
   UseQueryOptions,
   UseQueryResult,
-} from '@tanstack/react-query';
+} from "@tanstack/react-query";
 import type {
   ClientResponse,
   ClientResponsePaginationResponse,
@@ -83,8 +83,8 @@ import type {
   UserPermissionsResponse,
   VacancyItemResponse,
   VacancyResponse,
-} from './index.schemas';
-import {backendRequest} from '../utils/backendRequest';
+} from "./index.schemas";
+import { backendRequest } from "../utils/backendRequest";
 
 /**
  * @summary Authorization with Google account.
@@ -95,8 +95,8 @@ export const postApiAccountSsoGoogle = (
 ) => {
   return backendRequest<JwtWithRefreshResponse>({
     url: `/api/account/sso/google`,
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
     data: loginSsoGoogleCommand,
     params,
   });
@@ -109,27 +109,27 @@ export const getPostApiAccountSsoGoogleMutationOptions = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof postApiAccountSsoGoogle>>,
     TError,
-    {data: LoginSsoGoogleCommand; params?: PostApiAccountSsoGoogleParams},
+    { data: LoginSsoGoogleCommand; params?: PostApiAccountSsoGoogleParams },
     TContext
   >;
 }): UseMutationOptions<
   Awaited<ReturnType<typeof postApiAccountSsoGoogle>>,
   TError,
-  {data: LoginSsoGoogleCommand; params?: PostApiAccountSsoGoogleParams},
+  { data: LoginSsoGoogleCommand; params?: PostApiAccountSsoGoogleParams },
   TContext
 > => {
-  const {mutation: mutationOptions} = options ?? {};
+  const { mutation: mutationOptions } = options ?? {};
 
   const mutationFn: MutationFunction<
     Awaited<ReturnType<typeof postApiAccountSsoGoogle>>,
-    {data: LoginSsoGoogleCommand; params?: PostApiAccountSsoGoogleParams}
+    { data: LoginSsoGoogleCommand; params?: PostApiAccountSsoGoogleParams }
   > = props => {
-    const {data, params} = props ?? {};
+    const { data, params } = props ?? {};
 
     return postApiAccountSsoGoogle(data, params);
   };
 
-  return {mutationFn, ...mutationOptions};
+  return { mutationFn, ...mutationOptions };
 };
 
 export type PostApiAccountSsoGoogleMutationResult = NonNullable<
@@ -148,13 +148,13 @@ export const usePostApiAccountSsoGoogle = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof postApiAccountSsoGoogle>>,
     TError,
-    {data: LoginSsoGoogleCommand; params?: PostApiAccountSsoGoogleParams},
+    { data: LoginSsoGoogleCommand; params?: PostApiAccountSsoGoogleParams },
     TContext
   >;
 }): UseMutationResult<
   Awaited<ReturnType<typeof postApiAccountSsoGoogle>>,
   TError,
-  {data: LoginSsoGoogleCommand; params?: PostApiAccountSsoGoogleParams},
+  { data: LoginSsoGoogleCommand; params?: PostApiAccountSsoGoogleParams },
   TContext
 > => {
   const mutationOptions = getPostApiAccountSsoGoogleMutationOptions(options);
@@ -170,8 +170,8 @@ export const postApiAccountRefresh = (
 ) => {
   return backendRequest<JwtWithRefreshResponse>({
     url: `/api/account/refresh`,
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
     data: refreshTokenCommand,
   });
 };
@@ -183,27 +183,27 @@ export const getPostApiAccountRefreshMutationOptions = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof postApiAccountRefresh>>,
     TError,
-    {data: RefreshTokenCommand},
+    { data: RefreshTokenCommand },
     TContext
   >;
 }): UseMutationOptions<
   Awaited<ReturnType<typeof postApiAccountRefresh>>,
   TError,
-  {data: RefreshTokenCommand},
+  { data: RefreshTokenCommand },
   TContext
 > => {
-  const {mutation: mutationOptions} = options ?? {};
+  const { mutation: mutationOptions } = options ?? {};
 
   const mutationFn: MutationFunction<
     Awaited<ReturnType<typeof postApiAccountRefresh>>,
-    {data: RefreshTokenCommand}
+    { data: RefreshTokenCommand }
   > = props => {
-    const {data} = props ?? {};
+    const { data } = props ?? {};
 
     return postApiAccountRefresh(data);
   };
 
-  return {mutationFn, ...mutationOptions};
+  return { mutationFn, ...mutationOptions };
 };
 
 export type PostApiAccountRefreshMutationResult = NonNullable<
@@ -222,13 +222,13 @@ export const usePostApiAccountRefresh = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof postApiAccountRefresh>>,
     TError,
-    {data: RefreshTokenCommand},
+    { data: RefreshTokenCommand },
     TContext
   >;
 }): UseMutationResult<
   Awaited<ReturnType<typeof postApiAccountRefresh>>,
   TError,
-  {data: RefreshTokenCommand},
+  { data: RefreshTokenCommand },
   TContext
 > => {
   const mutationOptions = getPostApiAccountRefreshMutationOptions(options);
@@ -245,7 +245,7 @@ export const getApiAccountVerificationKey = (
 ) => {
   return backendRequest<string>({
     url: `/api/account/verificationKey`,
-    method: 'GET',
+    method: "GET",
     params,
     signal,
   });
@@ -272,20 +272,20 @@ export const getGetApiAccountVerificationKeyQueryOptions = <
     >;
   },
 ) => {
-  const {query: queryOptions} = options ?? {};
+  const { query: queryOptions } = options ?? {};
 
   const queryKey =
     queryOptions?.queryKey ?? getGetApiAccountVerificationKeyQueryKey(params);
 
   const queryFn: QueryFunction<
     Awaited<ReturnType<typeof getApiAccountVerificationKey>>
-  > = ({signal}) => getApiAccountVerificationKey(params, signal);
+  > = ({ signal }) => getApiAccountVerificationKey(params, signal);
 
-  return {queryKey, queryFn, ...queryOptions} as UseQueryOptions<
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
     Awaited<ReturnType<typeof getApiAccountVerificationKey>>,
     TError,
     TData
-  > & {queryKey: QueryKey};
+  > & { queryKey: QueryKey };
 };
 
 export type GetApiAccountVerificationKeyQueryResult = NonNullable<
@@ -312,10 +312,10 @@ export function useGetApiAccountVerificationKey<
           TError,
           TData
         >,
-        'initialData'
+        "initialData"
       >;
   },
-): DefinedUseQueryResult<TData, TError> & {queryKey: QueryKey};
+): DefinedUseQueryResult<TData, TError> & { queryKey: QueryKey };
 export function useGetApiAccountVerificationKey<
   TData = Awaited<ReturnType<typeof getApiAccountVerificationKey>>,
   TError = unknown,
@@ -335,10 +335,10 @@ export function useGetApiAccountVerificationKey<
           TError,
           TData
         >,
-        'initialData'
+        "initialData"
       >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey};
+): UseQueryResult<TData, TError> & { queryKey: QueryKey };
 export function useGetApiAccountVerificationKey<
   TData = Awaited<ReturnType<typeof getApiAccountVerificationKey>>,
   TError = unknown,
@@ -353,7 +353,7 @@ export function useGetApiAccountVerificationKey<
       >
     >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey};
+): UseQueryResult<TData, TError> & { queryKey: QueryKey };
 /**
  * @summary Return a public key to verify signature for access token.
  */
@@ -372,7 +372,7 @@ export function useGetApiAccountVerificationKey<
       >
     >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey} {
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
   const queryOptions = getGetApiAccountVerificationKeyQueryOptions(
     params,
     options,
@@ -395,8 +395,8 @@ export const postApiAccountClientsLogin = (
 ) => {
   return backendRequest<JwtResponse>({
     url: `/api/account/clients/login`,
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
     data: loginClientCommand,
   });
 };
@@ -408,27 +408,27 @@ export const getPostApiAccountClientsLoginMutationOptions = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof postApiAccountClientsLogin>>,
     TError,
-    {data: LoginClientCommand},
+    { data: LoginClientCommand },
     TContext
   >;
 }): UseMutationOptions<
   Awaited<ReturnType<typeof postApiAccountClientsLogin>>,
   TError,
-  {data: LoginClientCommand},
+  { data: LoginClientCommand },
   TContext
 > => {
-  const {mutation: mutationOptions} = options ?? {};
+  const { mutation: mutationOptions } = options ?? {};
 
   const mutationFn: MutationFunction<
     Awaited<ReturnType<typeof postApiAccountClientsLogin>>,
-    {data: LoginClientCommand}
+    { data: LoginClientCommand }
   > = props => {
-    const {data} = props ?? {};
+    const { data } = props ?? {};
 
     return postApiAccountClientsLogin(data);
   };
 
-  return {mutationFn, ...mutationOptions};
+  return { mutationFn, ...mutationOptions };
 };
 
 export type PostApiAccountClientsLoginMutationResult = NonNullable<
@@ -447,13 +447,13 @@ export const usePostApiAccountClientsLogin = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof postApiAccountClientsLogin>>,
     TError,
-    {data: LoginClientCommand},
+    { data: LoginClientCommand },
     TContext
   >;
 }): UseMutationResult<
   Awaited<ReturnType<typeof postApiAccountClientsLogin>>,
   TError,
-  {data: LoginClientCommand},
+  { data: LoginClientCommand },
   TContext
 > => {
   const mutationOptions = getPostApiAccountClientsLoginMutationOptions(options);
@@ -467,7 +467,7 @@ export const usePostApiAccountClientsLogin = <
 export const postApiAccountGuest = () => {
   return backendRequest<JwtWithRefreshResponse>({
     url: `/api/account/guest`,
-    method: 'POST',
+    method: "POST",
   });
 };
 
@@ -487,7 +487,7 @@ export const getPostApiAccountGuestMutationOptions = <
   void,
   TContext
 > => {
-  const {mutation: mutationOptions} = options ?? {};
+  const { mutation: mutationOptions } = options ?? {};
 
   const mutationFn: MutationFunction<
     Awaited<ReturnType<typeof postApiAccountGuest>>,
@@ -496,7 +496,7 @@ export const getPostApiAccountGuestMutationOptions = <
     return postApiAccountGuest();
   };
 
-  return {mutationFn, ...mutationOptions};
+  return { mutationFn, ...mutationOptions };
 };
 
 export type PostApiAccountGuestMutationResult = NonNullable<
@@ -537,8 +537,8 @@ export const postApiClients = (
 ) => {
   return backendRequest<ClientResponse>({
     url: `/api/clients`,
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
     data: registerClientCommand,
   });
 };
@@ -550,27 +550,27 @@ export const getPostApiClientsMutationOptions = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof postApiClients>>,
     TError,
-    {data: RegisterClientCommand},
+    { data: RegisterClientCommand },
     TContext
   >;
 }): UseMutationOptions<
   Awaited<ReturnType<typeof postApiClients>>,
   TError,
-  {data: RegisterClientCommand},
+  { data: RegisterClientCommand },
   TContext
 > => {
-  const {mutation: mutationOptions} = options ?? {};
+  const { mutation: mutationOptions } = options ?? {};
 
   const mutationFn: MutationFunction<
     Awaited<ReturnType<typeof postApiClients>>,
-    {data: RegisterClientCommand}
+    { data: RegisterClientCommand }
   > = props => {
-    const {data} = props ?? {};
+    const { data } = props ?? {};
 
     return postApiClients(data);
   };
 
-  return {mutationFn, ...mutationOptions};
+  return { mutationFn, ...mutationOptions };
 };
 
 export type PostApiClientsMutationResult = NonNullable<
@@ -589,13 +589,13 @@ export const usePostApiClients = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof postApiClients>>,
     TError,
-    {data: RegisterClientCommand},
+    { data: RegisterClientCommand },
     TContext
   >;
 }): UseMutationResult<
   Awaited<ReturnType<typeof postApiClients>>,
   TError,
-  {data: RegisterClientCommand},
+  { data: RegisterClientCommand },
   TContext
 > => {
   const mutationOptions = getPostApiClientsMutationOptions(options);
@@ -612,7 +612,7 @@ export const getApiClients = (
 ) => {
   return backendRequest<ClientResponsePaginationResponse>({
     url: `/api/clients`,
-    method: 'GET',
+    method: "GET",
     params,
     signal,
   });
@@ -633,7 +633,7 @@ export const getGetApiClientsQueryOptions = <
     >;
   },
 ) => {
-  const {query: queryOptions} = options ?? {};
+  const { query: queryOptions } = options ?? {};
 
   const queryKey = queryOptions?.queryKey ?? getGetApiClientsQueryKey(params);
 
@@ -641,11 +641,11 @@ export const getGetApiClientsQueryOptions = <
     signal,
   }) => getApiClients(params, signal);
 
-  return {queryKey, queryFn, ...queryOptions} as UseQueryOptions<
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
     Awaited<ReturnType<typeof getApiClients>>,
     TError,
     TData
-  > & {queryKey: QueryKey};
+  > & { queryKey: QueryKey };
 };
 
 export type GetApiClientsQueryResult = NonNullable<
@@ -668,10 +668,10 @@ export function useGetApiClients<
           TError,
           TData
         >,
-        'initialData'
+        "initialData"
       >;
   },
-): DefinedUseQueryResult<TData, TError> & {queryKey: QueryKey};
+): DefinedUseQueryResult<TData, TError> & { queryKey: QueryKey };
 export function useGetApiClients<
   TData = Awaited<ReturnType<typeof getApiClients>>,
   TError = ErrorResponse,
@@ -687,10 +687,10 @@ export function useGetApiClients<
           TError,
           TData
         >,
-        'initialData'
+        "initialData"
       >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey};
+): UseQueryResult<TData, TError> & { queryKey: QueryKey };
 export function useGetApiClients<
   TData = Awaited<ReturnType<typeof getApiClients>>,
   TError = ErrorResponse,
@@ -701,7 +701,7 @@ export function useGetApiClients<
       UseQueryOptions<Awaited<ReturnType<typeof getApiClients>>, TError, TData>
     >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey};
+): UseQueryResult<TData, TError> & { queryKey: QueryKey };
 /**
  * @summary Returns paginated list of clients.
  */
@@ -716,7 +716,7 @@ export function useGetApiClients<
       UseQueryOptions<Awaited<ReturnType<typeof getApiClients>>, TError, TData>
     >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey} {
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
   const queryOptions = getGetApiClientsQueryOptions(params, options);
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
@@ -734,7 +734,7 @@ export function useGetApiClients<
 export const postApiClientsClientIdResetSecret = (clientId: string) => {
   return backendRequest<ClientResponse>({
     url: `/api/clients/${clientId}/reset-secret`,
-    method: 'POST',
+    method: "POST",
   });
 };
 
@@ -745,27 +745,27 @@ export const getPostApiClientsClientIdResetSecretMutationOptions = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof postApiClientsClientIdResetSecret>>,
     TError,
-    {clientId: string},
+    { clientId: string },
     TContext
   >;
 }): UseMutationOptions<
   Awaited<ReturnType<typeof postApiClientsClientIdResetSecret>>,
   TError,
-  {clientId: string},
+  { clientId: string },
   TContext
 > => {
-  const {mutation: mutationOptions} = options ?? {};
+  const { mutation: mutationOptions } = options ?? {};
 
   const mutationFn: MutationFunction<
     Awaited<ReturnType<typeof postApiClientsClientIdResetSecret>>,
-    {clientId: string}
+    { clientId: string }
   > = props => {
-    const {clientId} = props ?? {};
+    const { clientId } = props ?? {};
 
     return postApiClientsClientIdResetSecret(clientId);
   };
 
-  return {mutationFn, ...mutationOptions};
+  return { mutationFn, ...mutationOptions };
 };
 
 export type PostApiClientsClientIdResetSecretMutationResult = NonNullable<
@@ -784,13 +784,13 @@ export const usePostApiClientsClientIdResetSecret = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof postApiClientsClientIdResetSecret>>,
     TError,
-    {clientId: string},
+    { clientId: string },
     TContext
   >;
 }): UseMutationResult<
   Awaited<ReturnType<typeof postApiClientsClientIdResetSecret>>,
   TError,
-  {clientId: string},
+  { clientId: string },
   TContext
 > => {
   const mutationOptions =
@@ -805,7 +805,7 @@ export const usePostApiClientsClientIdResetSecret = <
 export const deleteApiClientsClientId = (clientId: string) => {
   return backendRequest<void>({
     url: `/api/clients/${clientId}`,
-    method: 'DELETE',
+    method: "DELETE",
   });
 };
 
@@ -816,27 +816,27 @@ export const getDeleteApiClientsClientIdMutationOptions = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof deleteApiClientsClientId>>,
     TError,
-    {clientId: string},
+    { clientId: string },
     TContext
   >;
 }): UseMutationOptions<
   Awaited<ReturnType<typeof deleteApiClientsClientId>>,
   TError,
-  {clientId: string},
+  { clientId: string },
   TContext
 > => {
-  const {mutation: mutationOptions} = options ?? {};
+  const { mutation: mutationOptions } = options ?? {};
 
   const mutationFn: MutationFunction<
     Awaited<ReturnType<typeof deleteApiClientsClientId>>,
-    {clientId: string}
+    { clientId: string }
   > = props => {
-    const {clientId} = props ?? {};
+    const { clientId } = props ?? {};
 
     return deleteApiClientsClientId(clientId);
   };
 
-  return {mutationFn, ...mutationOptions};
+  return { mutationFn, ...mutationOptions };
 };
 
 export type DeleteApiClientsClientIdMutationResult = NonNullable<
@@ -855,13 +855,13 @@ export const useDeleteApiClientsClientId = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof deleteApiClientsClientId>>,
     TError,
-    {clientId: string},
+    { clientId: string },
     TContext
   >;
 }): UseMutationResult<
   Awaited<ReturnType<typeof deleteApiClientsClientId>>,
   TError,
-  {clientId: string},
+  { clientId: string },
   TContext
 > => {
   const mutationOptions = getDeleteApiClientsClientIdMutationOptions(options);
@@ -878,8 +878,8 @@ export const putApiClientsClientId = (
 ) => {
   return backendRequest<ClientResponse>({
     url: `/api/clients/${clientId}`,
-    method: 'PUT',
-    headers: {'Content-Type': 'application/json'},
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
     data: editClientCommand,
   });
 };
@@ -891,27 +891,27 @@ export const getPutApiClientsClientIdMutationOptions = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof putApiClientsClientId>>,
     TError,
-    {clientId: string; data: EditClientCommand},
+    { clientId: string; data: EditClientCommand },
     TContext
   >;
 }): UseMutationOptions<
   Awaited<ReturnType<typeof putApiClientsClientId>>,
   TError,
-  {clientId: string; data: EditClientCommand},
+  { clientId: string; data: EditClientCommand },
   TContext
 > => {
-  const {mutation: mutationOptions} = options ?? {};
+  const { mutation: mutationOptions } = options ?? {};
 
   const mutationFn: MutationFunction<
     Awaited<ReturnType<typeof putApiClientsClientId>>,
-    {clientId: string; data: EditClientCommand}
+    { clientId: string; data: EditClientCommand }
   > = props => {
-    const {clientId, data} = props ?? {};
+    const { clientId, data } = props ?? {};
 
     return putApiClientsClientId(clientId, data);
   };
 
-  return {mutationFn, ...mutationOptions};
+  return { mutationFn, ...mutationOptions };
 };
 
 export type PutApiClientsClientIdMutationResult = NonNullable<
@@ -930,13 +930,13 @@ export const usePutApiClientsClientId = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof putApiClientsClientId>>,
     TError,
-    {clientId: string; data: EditClientCommand},
+    { clientId: string; data: EditClientCommand },
     TContext
   >;
 }): UseMutationResult<
   Awaited<ReturnType<typeof putApiClientsClientId>>,
   TError,
-  {clientId: string; data: EditClientCommand},
+  { clientId: string; data: EditClientCommand },
   TContext
 > => {
   const mutationOptions = getPutApiClientsClientIdMutationOptions(options);
@@ -953,7 +953,7 @@ export const getApiClientsClientId = (
 ) => {
   return backendRequest<ClientResponse>({
     url: `/api/clients/${clientId}`,
-    method: 'GET',
+    method: "GET",
     signal,
   });
 };
@@ -977,14 +977,14 @@ export const getGetApiClientsClientIdQueryOptions = <
     >;
   },
 ) => {
-  const {query: queryOptions} = options ?? {};
+  const { query: queryOptions } = options ?? {};
 
   const queryKey =
     queryOptions?.queryKey ?? getGetApiClientsClientIdQueryKey(clientId);
 
   const queryFn: QueryFunction<
     Awaited<ReturnType<typeof getApiClientsClientId>>
-  > = ({signal}) => getApiClientsClientId(clientId, signal);
+  > = ({ signal }) => getApiClientsClientId(clientId, signal);
 
   return {
     queryKey,
@@ -995,7 +995,7 @@ export const getGetApiClientsClientIdQueryOptions = <
     Awaited<ReturnType<typeof getApiClientsClientId>>,
     TError,
     TData
-  > & {queryKey: QueryKey};
+  > & { queryKey: QueryKey };
 };
 
 export type GetApiClientsClientIdQueryResult = NonNullable<
@@ -1022,10 +1022,10 @@ export function useGetApiClientsClientId<
           TError,
           TData
         >,
-        'initialData'
+        "initialData"
       >;
   },
-): DefinedUseQueryResult<TData, TError> & {queryKey: QueryKey};
+): DefinedUseQueryResult<TData, TError> & { queryKey: QueryKey };
 export function useGetApiClientsClientId<
   TData = Awaited<ReturnType<typeof getApiClientsClientId>>,
   TError = ErrorResponse,
@@ -1045,10 +1045,10 @@ export function useGetApiClientsClientId<
           TError,
           TData
         >,
-        'initialData'
+        "initialData"
       >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey};
+): UseQueryResult<TData, TError> & { queryKey: QueryKey };
 export function useGetApiClientsClientId<
   TData = Awaited<ReturnType<typeof getApiClientsClientId>>,
   TError = ErrorResponse,
@@ -1063,7 +1063,7 @@ export function useGetApiClientsClientId<
       >
     >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey};
+): UseQueryResult<TData, TError> & { queryKey: QueryKey };
 /**
  * @summary Returns data for the specified client id.
  */
@@ -1082,7 +1082,7 @@ export function useGetApiClientsClientId<
       >
     >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey} {
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
   const queryOptions = getGetApiClientsClientIdQueryOptions(clientId, options);
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
@@ -1102,8 +1102,8 @@ export const postApiCoinsDebit = (
 ) => {
   return backendRequest<UserBalanceUpdatedResponse>({
     url: `/api/coins/debit`,
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
     data: debitCoinsToUserCommand,
   });
 };
@@ -1115,27 +1115,27 @@ export const getPostApiCoinsDebitMutationOptions = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof postApiCoinsDebit>>,
     TError,
-    {data: DebitCoinsToUserCommand},
+    { data: DebitCoinsToUserCommand },
     TContext
   >;
 }): UseMutationOptions<
   Awaited<ReturnType<typeof postApiCoinsDebit>>,
   TError,
-  {data: DebitCoinsToUserCommand},
+  { data: DebitCoinsToUserCommand },
   TContext
 > => {
-  const {mutation: mutationOptions} = options ?? {};
+  const { mutation: mutationOptions } = options ?? {};
 
   const mutationFn: MutationFunction<
     Awaited<ReturnType<typeof postApiCoinsDebit>>,
-    {data: DebitCoinsToUserCommand}
+    { data: DebitCoinsToUserCommand }
   > = props => {
-    const {data} = props ?? {};
+    const { data } = props ?? {};
 
     return postApiCoinsDebit(data);
   };
 
-  return {mutationFn, ...mutationOptions};
+  return { mutationFn, ...mutationOptions };
 };
 
 export type PostApiCoinsDebitMutationResult = NonNullable<
@@ -1154,13 +1154,13 @@ export const usePostApiCoinsDebit = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof postApiCoinsDebit>>,
     TError,
-    {data: DebitCoinsToUserCommand},
+    { data: DebitCoinsToUserCommand },
     TContext
   >;
 }): UseMutationResult<
   Awaited<ReturnType<typeof postApiCoinsDebit>>,
   TError,
-  {data: DebitCoinsToUserCommand},
+  { data: DebitCoinsToUserCommand },
   TContext
 > => {
   const mutationOptions = getPostApiCoinsDebitMutationOptions(options);
@@ -1176,8 +1176,8 @@ export const postApiCoinsCredit = (
 ) => {
   return backendRequest<UserBalanceUpdatedResponse>({
     url: `/api/coins/credit`,
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
     data: creditCoinsToUserCommand,
   });
 };
@@ -1189,27 +1189,27 @@ export const getPostApiCoinsCreditMutationOptions = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof postApiCoinsCredit>>,
     TError,
-    {data: CreditCoinsToUserCommand},
+    { data: CreditCoinsToUserCommand },
     TContext
   >;
 }): UseMutationOptions<
   Awaited<ReturnType<typeof postApiCoinsCredit>>,
   TError,
-  {data: CreditCoinsToUserCommand},
+  { data: CreditCoinsToUserCommand },
   TContext
 > => {
-  const {mutation: mutationOptions} = options ?? {};
+  const { mutation: mutationOptions } = options ?? {};
 
   const mutationFn: MutationFunction<
     Awaited<ReturnType<typeof postApiCoinsCredit>>,
-    {data: CreditCoinsToUserCommand}
+    { data: CreditCoinsToUserCommand }
   > = props => {
-    const {data} = props ?? {};
+    const { data } = props ?? {};
 
     return postApiCoinsCredit(data);
   };
 
-  return {mutationFn, ...mutationOptions};
+  return { mutationFn, ...mutationOptions };
 };
 
 export type PostApiCoinsCreditMutationResult = NonNullable<
@@ -1228,13 +1228,13 @@ export const usePostApiCoinsCredit = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof postApiCoinsCredit>>,
     TError,
-    {data: CreditCoinsToUserCommand},
+    { data: CreditCoinsToUserCommand },
     TContext
   >;
 }): UseMutationResult<
   Awaited<ReturnType<typeof postApiCoinsCredit>>,
   TError,
-  {data: CreditCoinsToUserCommand},
+  { data: CreditCoinsToUserCommand },
   TContext
 > => {
   const mutationOptions = getPostApiCoinsCreditMutationOptions(options);
@@ -1250,8 +1250,8 @@ export const postApiCoinsTransfer = (
 ) => {
   return backendRequest<UserBalanceUpdatedResponse>({
     url: `/api/coins/transfer`,
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
     data: transferCoinsCommand,
   });
 };
@@ -1263,27 +1263,27 @@ export const getPostApiCoinsTransferMutationOptions = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof postApiCoinsTransfer>>,
     TError,
-    {data: TransferCoinsCommand},
+    { data: TransferCoinsCommand },
     TContext
   >;
 }): UseMutationOptions<
   Awaited<ReturnType<typeof postApiCoinsTransfer>>,
   TError,
-  {data: TransferCoinsCommand},
+  { data: TransferCoinsCommand },
   TContext
 > => {
-  const {mutation: mutationOptions} = options ?? {};
+  const { mutation: mutationOptions } = options ?? {};
 
   const mutationFn: MutationFunction<
     Awaited<ReturnType<typeof postApiCoinsTransfer>>,
-    {data: TransferCoinsCommand}
+    { data: TransferCoinsCommand }
   > = props => {
-    const {data} = props ?? {};
+    const { data } = props ?? {};
 
     return postApiCoinsTransfer(data);
   };
 
-  return {mutationFn, ...mutationOptions};
+  return { mutationFn, ...mutationOptions };
 };
 
 export type PostApiCoinsTransferMutationResult = NonNullable<
@@ -1302,13 +1302,13 @@ export const usePostApiCoinsTransfer = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof postApiCoinsTransfer>>,
     TError,
-    {data: TransferCoinsCommand},
+    { data: TransferCoinsCommand },
     TContext
   >;
 }): UseMutationResult<
   Awaited<ReturnType<typeof postApiCoinsTransfer>>,
   TError,
-  {data: TransferCoinsCommand},
+  { data: TransferCoinsCommand },
   TContext
 > => {
   const mutationOptions = getPostApiCoinsTransferMutationOptions(options);
@@ -1319,13 +1319,16 @@ export const usePostApiCoinsTransfer = <
 /**
  * @summary Redeem promo code.
  */
-export const postApiCoinsRedeem = (redeemCoinsCommand: RedeemCoinsCommand) => {
-  return backendRequest<RedeemCoinsResponse>({
+export const postApiCoinsRedeem = async (
+  redeemCoinsCommand: RedeemCoinsCommand,
+) => {
+  const { count } = await backendRequest<RedeemCoinsResponse>({
     url: `/api/coins/redeem`,
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
     data: redeemCoinsCommand,
   });
+  return { count };
 };
 
 export const getPostApiCoinsRedeemMutationOptions = <
@@ -1335,27 +1338,27 @@ export const getPostApiCoinsRedeemMutationOptions = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof postApiCoinsRedeem>>,
     TError,
-    {data: RedeemCoinsCommand},
+    { data: RedeemCoinsCommand },
     TContext
   >;
 }): UseMutationOptions<
   Awaited<ReturnType<typeof postApiCoinsRedeem>>,
   TError,
-  {data: RedeemCoinsCommand},
+  { data: RedeemCoinsCommand },
   TContext
 > => {
-  const {mutation: mutationOptions} = options ?? {};
+  const { mutation: mutationOptions } = options ?? {};
 
   const mutationFn: MutationFunction<
     Awaited<ReturnType<typeof postApiCoinsRedeem>>,
-    {data: RedeemCoinsCommand}
+    { data: RedeemCoinsCommand }
   > = props => {
-    const {data} = props ?? {};
+    const { data } = props ?? {};
 
     return postApiCoinsRedeem(data);
   };
 
-  return {mutationFn, ...mutationOptions};
+  return { mutationFn, ...mutationOptions };
 };
 
 export type PostApiCoinsRedeemMutationResult = NonNullable<
@@ -1374,13 +1377,13 @@ export const usePostApiCoinsRedeem = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof postApiCoinsRedeem>>,
     TError,
-    {data: RedeemCoinsCommand},
+    { data: RedeemCoinsCommand },
     TContext
   >;
 }): UseMutationResult<
   Awaited<ReturnType<typeof postApiCoinsRedeem>>,
   TError,
-  {data: RedeemCoinsCommand},
+  { data: RedeemCoinsCommand },
   TContext
 > => {
   const mutationOptions = getPostApiCoinsRedeemMutationOptions(options);
@@ -1394,8 +1397,8 @@ export const usePostApiCoinsRedeem = <
 export const getApiImageKey = (key: string, signal?: AbortSignal) => {
   return backendRequest<Blob>({
     url: `/api/image/${key}`,
-    method: 'GET',
-    responseType: 'blob',
+    method: "GET",
+    responseType: "blob",
     signal,
   });
 };
@@ -1415,7 +1418,7 @@ export const getGetApiImageKeyQueryOptions = <
     >;
   },
 ) => {
-  const {query: queryOptions} = options ?? {};
+  const { query: queryOptions } = options ?? {};
 
   const queryKey = queryOptions?.queryKey ?? getGetApiImageKeyQueryKey(key);
 
@@ -1432,7 +1435,7 @@ export const getGetApiImageKeyQueryOptions = <
     Awaited<ReturnType<typeof getApiImageKey>>,
     TError,
     TData
-  > & {queryKey: QueryKey};
+  > & { queryKey: QueryKey };
 };
 
 export type GetApiImageKeyQueryResult = NonNullable<
@@ -1455,10 +1458,10 @@ export function useGetApiImageKey<
           TError,
           TData
         >,
-        'initialData'
+        "initialData"
       >;
   },
-): DefinedUseQueryResult<TData, TError> & {queryKey: QueryKey};
+): DefinedUseQueryResult<TData, TError> & { queryKey: QueryKey };
 export function useGetApiImageKey<
   TData = Awaited<ReturnType<typeof getApiImageKey>>,
   TError = ErrorResponse,
@@ -1474,10 +1477,10 @@ export function useGetApiImageKey<
           TError,
           TData
         >,
-        'initialData'
+        "initialData"
       >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey};
+): UseQueryResult<TData, TError> & { queryKey: QueryKey };
 export function useGetApiImageKey<
   TData = Awaited<ReturnType<typeof getApiImageKey>>,
   TError = ErrorResponse,
@@ -1488,7 +1491,7 @@ export function useGetApiImageKey<
       UseQueryOptions<Awaited<ReturnType<typeof getApiImageKey>>, TError, TData>
     >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey};
+): UseQueryResult<TData, TError> & { queryKey: QueryKey };
 /**
  * @summary Return image by storage key.
  */
@@ -1503,7 +1506,7 @@ export function useGetApiImageKey<
       UseQueryOptions<Awaited<ReturnType<typeof getApiImageKey>>, TError, TData>
     >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey} {
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
   const queryOptions = getGetApiImageKeyQueryOptions(key, options);
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
@@ -1524,7 +1527,7 @@ export const getApiEmployeeList = (
 ) => {
   return backendRequest<EmployeeInfoWithBalanceResponsePaginationResponse>({
     url: `/api/employee/list`,
-    method: 'GET',
+    method: "GET",
     params,
     signal,
   });
@@ -1551,20 +1554,20 @@ export const getGetApiEmployeeListQueryOptions = <
     >;
   },
 ) => {
-  const {query: queryOptions} = options ?? {};
+  const { query: queryOptions } = options ?? {};
 
   const queryKey =
     queryOptions?.queryKey ?? getGetApiEmployeeListQueryKey(params);
 
   const queryFn: QueryFunction<
     Awaited<ReturnType<typeof getApiEmployeeList>>
-  > = ({signal}) => getApiEmployeeList(params, signal);
+  > = ({ signal }) => getApiEmployeeList(params, signal);
 
-  return {queryKey, queryFn, ...queryOptions} as UseQueryOptions<
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
     Awaited<ReturnType<typeof getApiEmployeeList>>,
     TError,
     TData
-  > & {queryKey: QueryKey};
+  > & { queryKey: QueryKey };
 };
 
 export type GetApiEmployeeListQueryResult = NonNullable<
@@ -1591,10 +1594,10 @@ export function useGetApiEmployeeList<
           TError,
           TData
         >,
-        'initialData'
+        "initialData"
       >;
   },
-): DefinedUseQueryResult<TData, TError> & {queryKey: QueryKey};
+): DefinedUseQueryResult<TData, TError> & { queryKey: QueryKey };
 export function useGetApiEmployeeList<
   TData = Awaited<ReturnType<typeof getApiEmployeeList>>,
   TError = ErrorResponse,
@@ -1614,10 +1617,10 @@ export function useGetApiEmployeeList<
           TError,
           TData
         >,
-        'initialData'
+        "initialData"
       >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey};
+): UseQueryResult<TData, TError> & { queryKey: QueryKey };
 export function useGetApiEmployeeList<
   TData = Awaited<ReturnType<typeof getApiEmployeeList>>,
   TError = ErrorResponse,
@@ -1632,7 +1635,7 @@ export function useGetApiEmployeeList<
       >
     >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey};
+): UseQueryResult<TData, TError> & { queryKey: QueryKey };
 /**
  * @summary Return paginated list of employees.
  */
@@ -1651,7 +1654,7 @@ export function useGetApiEmployeeList<
       >
     >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey} {
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
   const queryOptions = getGetApiEmployeeListQueryOptions(params, options);
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
@@ -1672,7 +1675,7 @@ export const getApiProfileAssignment = (
 ) => {
   return backendRequest<UserAssignmentResponsePaginationResponse>({
     url: `/api/profile/assignment`,
-    method: 'GET',
+    method: "GET",
     params,
     signal,
   });
@@ -1699,20 +1702,20 @@ export const getGetApiProfileAssignmentQueryOptions = <
     >;
   },
 ) => {
-  const {query: queryOptions} = options ?? {};
+  const { query: queryOptions } = options ?? {};
 
   const queryKey =
     queryOptions?.queryKey ?? getGetApiProfileAssignmentQueryKey(params);
 
   const queryFn: QueryFunction<
     Awaited<ReturnType<typeof getApiProfileAssignment>>
-  > = ({signal}) => getApiProfileAssignment(params, signal);
+  > = ({ signal }) => getApiProfileAssignment(params, signal);
 
-  return {queryKey, queryFn, ...queryOptions} as UseQueryOptions<
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
     Awaited<ReturnType<typeof getApiProfileAssignment>>,
     TError,
     TData
-  > & {queryKey: QueryKey};
+  > & { queryKey: QueryKey };
 };
 
 export type GetApiProfileAssignmentQueryResult = NonNullable<
@@ -1739,10 +1742,10 @@ export function useGetApiProfileAssignment<
           TError,
           TData
         >,
-        'initialData'
+        "initialData"
       >;
   },
-): DefinedUseQueryResult<TData, TError> & {queryKey: QueryKey};
+): DefinedUseQueryResult<TData, TError> & { queryKey: QueryKey };
 export function useGetApiProfileAssignment<
   TData = Awaited<ReturnType<typeof getApiProfileAssignment>>,
   TError = ErrorResponse,
@@ -1762,10 +1765,10 @@ export function useGetApiProfileAssignment<
           TError,
           TData
         >,
-        'initialData'
+        "initialData"
       >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey};
+): UseQueryResult<TData, TError> & { queryKey: QueryKey };
 export function useGetApiProfileAssignment<
   TData = Awaited<ReturnType<typeof getApiProfileAssignment>>,
   TError = ErrorResponse,
@@ -1780,7 +1783,7 @@ export function useGetApiProfileAssignment<
       >
     >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey};
+): UseQueryResult<TData, TError> & { queryKey: QueryKey };
 /**
  * @summary Search users by assignments.
  */
@@ -1799,7 +1802,7 @@ export function useGetApiProfileAssignment<
       >
     >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey} {
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
   const queryOptions = getGetApiProfileAssignmentQueryOptions(params, options);
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
@@ -1819,8 +1822,8 @@ export const postApiProfileRecentAssignments = (
 ) => {
   return backendRequest<UserAssignmentResponse[]>({
     url: `/api/profile/recent-assignments`,
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
     data: getUsersMostRecentAssignmentsCommand,
   });
 };
@@ -1832,27 +1835,27 @@ export const getPostApiProfileRecentAssignmentsMutationOptions = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof postApiProfileRecentAssignments>>,
     TError,
-    {data: GetUsersMostRecentAssignmentsCommand},
+    { data: GetUsersMostRecentAssignmentsCommand },
     TContext
   >;
 }): UseMutationOptions<
   Awaited<ReturnType<typeof postApiProfileRecentAssignments>>,
   TError,
-  {data: GetUsersMostRecentAssignmentsCommand},
+  { data: GetUsersMostRecentAssignmentsCommand },
   TContext
 > => {
-  const {mutation: mutationOptions} = options ?? {};
+  const { mutation: mutationOptions } = options ?? {};
 
   const mutationFn: MutationFunction<
     Awaited<ReturnType<typeof postApiProfileRecentAssignments>>,
-    {data: GetUsersMostRecentAssignmentsCommand}
+    { data: GetUsersMostRecentAssignmentsCommand }
   > = props => {
-    const {data} = props ?? {};
+    const { data } = props ?? {};
 
     return postApiProfileRecentAssignments(data);
   };
 
-  return {mutationFn, ...mutationOptions};
+  return { mutationFn, ...mutationOptions };
 };
 
 export type PostApiProfileRecentAssignmentsMutationResult = NonNullable<
@@ -1872,13 +1875,13 @@ export const usePostApiProfileRecentAssignments = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof postApiProfileRecentAssignments>>,
     TError,
-    {data: GetUsersMostRecentAssignmentsCommand},
+    { data: GetUsersMostRecentAssignmentsCommand },
     TContext
   >;
 }): UseMutationResult<
   Awaited<ReturnType<typeof postApiProfileRecentAssignments>>,
   TError,
-  {data: GetUsersMostRecentAssignmentsCommand},
+  { data: GetUsersMostRecentAssignmentsCommand },
   TContext
 > => {
   const mutationOptions =
@@ -1895,8 +1898,8 @@ export const postApiPermissions = (
 ) => {
   return backendRequest<PermissionResponse[]>({
     url: `/api/permissions`,
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
     data: createPermissionCommand,
   });
 };
@@ -1908,27 +1911,27 @@ export const getPostApiPermissionsMutationOptions = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof postApiPermissions>>,
     TError,
-    {data: CreatePermissionCommand},
+    { data: CreatePermissionCommand },
     TContext
   >;
 }): UseMutationOptions<
   Awaited<ReturnType<typeof postApiPermissions>>,
   TError,
-  {data: CreatePermissionCommand},
+  { data: CreatePermissionCommand },
   TContext
 > => {
-  const {mutation: mutationOptions} = options ?? {};
+  const { mutation: mutationOptions } = options ?? {};
 
   const mutationFn: MutationFunction<
     Awaited<ReturnType<typeof postApiPermissions>>,
-    {data: CreatePermissionCommand}
+    { data: CreatePermissionCommand }
   > = props => {
-    const {data} = props ?? {};
+    const { data } = props ?? {};
 
     return postApiPermissions(data);
   };
 
-  return {mutationFn, ...mutationOptions};
+  return { mutationFn, ...mutationOptions };
 };
 
 export type PostApiPermissionsMutationResult = NonNullable<
@@ -1947,13 +1950,13 @@ export const usePostApiPermissions = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof postApiPermissions>>,
     TError,
-    {data: CreatePermissionCommand},
+    { data: CreatePermissionCommand },
     TContext
   >;
 }): UseMutationResult<
   Awaited<ReturnType<typeof postApiPermissions>>,
   TError,
-  {data: CreatePermissionCommand},
+  { data: CreatePermissionCommand },
   TContext
 > => {
   const mutationOptions = getPostApiPermissionsMutationOptions(options);
@@ -1970,7 +1973,7 @@ export const getApiPermissionsUserteams = (
 ) => {
   return backendRequest<ProfileSearchResponsePaginationResponse>({
     url: `/api/permissions/userteams`,
-    method: 'GET',
+    method: "GET",
     params,
     signal,
   });
@@ -1997,20 +2000,20 @@ export const getGetApiPermissionsUserteamsQueryOptions = <
     >;
   },
 ) => {
-  const {query: queryOptions} = options ?? {};
+  const { query: queryOptions } = options ?? {};
 
   const queryKey =
     queryOptions?.queryKey ?? getGetApiPermissionsUserteamsQueryKey(params);
 
   const queryFn: QueryFunction<
     Awaited<ReturnType<typeof getApiPermissionsUserteams>>
-  > = ({signal}) => getApiPermissionsUserteams(params, signal);
+  > = ({ signal }) => getApiPermissionsUserteams(params, signal);
 
-  return {queryKey, queryFn, ...queryOptions} as UseQueryOptions<
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
     Awaited<ReturnType<typeof getApiPermissionsUserteams>>,
     TError,
     TData
-  > & {queryKey: QueryKey};
+  > & { queryKey: QueryKey };
 };
 
 export type GetApiPermissionsUserteamsQueryResult = NonNullable<
@@ -2037,10 +2040,10 @@ export function useGetApiPermissionsUserteams<
           TError,
           TData
         >,
-        'initialData'
+        "initialData"
       >;
   },
-): DefinedUseQueryResult<TData, TError> & {queryKey: QueryKey};
+): DefinedUseQueryResult<TData, TError> & { queryKey: QueryKey };
 export function useGetApiPermissionsUserteams<
   TData = Awaited<ReturnType<typeof getApiPermissionsUserteams>>,
   TError = ErrorResponse,
@@ -2060,10 +2063,10 @@ export function useGetApiPermissionsUserteams<
           TError,
           TData
         >,
-        'initialData'
+        "initialData"
       >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey};
+): UseQueryResult<TData, TError> & { queryKey: QueryKey };
 export function useGetApiPermissionsUserteams<
   TData = Awaited<ReturnType<typeof getApiPermissionsUserteams>>,
   TError = ErrorResponse,
@@ -2078,7 +2081,7 @@ export function useGetApiPermissionsUserteams<
       >
     >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey};
+): UseQueryResult<TData, TError> & { queryKey: QueryKey };
 /**
  * @summary Get paginated list of users including teams.
  */
@@ -2097,7 +2100,7 @@ export function useGetApiPermissionsUserteams<
       >
     >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey} {
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
   const queryOptions = getGetApiPermissionsUserteamsQueryOptions(
     params,
     options,
@@ -2121,7 +2124,7 @@ export const getApiUserUserIdPermissions = (
 ) => {
   return backendRequest<UserPermissionsResponse>({
     url: `/api/user/${userId}/permissions`,
-    method: 'GET',
+    method: "GET",
     signal,
   });
 };
@@ -2145,14 +2148,14 @@ export const getGetApiUserUserIdPermissionsQueryOptions = <
     >;
   },
 ) => {
-  const {query: queryOptions} = options ?? {};
+  const { query: queryOptions } = options ?? {};
 
   const queryKey =
     queryOptions?.queryKey ?? getGetApiUserUserIdPermissionsQueryKey(userId);
 
   const queryFn: QueryFunction<
     Awaited<ReturnType<typeof getApiUserUserIdPermissions>>
-  > = ({signal}) => getApiUserUserIdPermissions(userId, signal);
+  > = ({ signal }) => getApiUserUserIdPermissions(userId, signal);
 
   return {
     queryKey,
@@ -2163,7 +2166,7 @@ export const getGetApiUserUserIdPermissionsQueryOptions = <
     Awaited<ReturnType<typeof getApiUserUserIdPermissions>>,
     TError,
     TData
-  > & {queryKey: QueryKey};
+  > & { queryKey: QueryKey };
 };
 
 export type GetApiUserUserIdPermissionsQueryResult = NonNullable<
@@ -2190,10 +2193,10 @@ export function useGetApiUserUserIdPermissions<
           TError,
           TData
         >,
-        'initialData'
+        "initialData"
       >;
   },
-): DefinedUseQueryResult<TData, TError> & {queryKey: QueryKey};
+): DefinedUseQueryResult<TData, TError> & { queryKey: QueryKey };
 export function useGetApiUserUserIdPermissions<
   TData = Awaited<ReturnType<typeof getApiUserUserIdPermissions>>,
   TError = ErrorResponse,
@@ -2213,10 +2216,10 @@ export function useGetApiUserUserIdPermissions<
           TError,
           TData
         >,
-        'initialData'
+        "initialData"
       >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey};
+): UseQueryResult<TData, TError> & { queryKey: QueryKey };
 export function useGetApiUserUserIdPermissions<
   TData = Awaited<ReturnType<typeof getApiUserUserIdPermissions>>,
   TError = ErrorResponse,
@@ -2231,7 +2234,7 @@ export function useGetApiUserUserIdPermissions<
       >
     >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey};
+): UseQueryResult<TData, TError> & { queryKey: QueryKey };
 /**
  * @summary Get a List of Permissions grouped by service for the specified user.
  */
@@ -2250,7 +2253,7 @@ export function useGetApiUserUserIdPermissions<
       >
     >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey} {
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
   const queryOptions = getGetApiUserUserIdPermissionsQueryOptions(
     userId,
     options,
@@ -2274,8 +2277,8 @@ export const patchApiUserUserIdPermissions = (
 ) => {
   return backendRequest<UserPermissionsResponse>({
     url: `/api/user/${userId}/permissions`,
-    method: 'PATCH',
-    headers: {'Content-Type': 'application/json'},
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
     data: patchUserPermissionsCommand,
   });
 };
@@ -2287,27 +2290,27 @@ export const getPatchApiUserUserIdPermissionsMutationOptions = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof patchApiUserUserIdPermissions>>,
     TError,
-    {userId: string; data: PatchUserPermissionsCommand},
+    { userId: string; data: PatchUserPermissionsCommand },
     TContext
   >;
 }): UseMutationOptions<
   Awaited<ReturnType<typeof patchApiUserUserIdPermissions>>,
   TError,
-  {userId: string; data: PatchUserPermissionsCommand},
+  { userId: string; data: PatchUserPermissionsCommand },
   TContext
 > => {
-  const {mutation: mutationOptions} = options ?? {};
+  const { mutation: mutationOptions } = options ?? {};
 
   const mutationFn: MutationFunction<
     Awaited<ReturnType<typeof patchApiUserUserIdPermissions>>,
-    {userId: string; data: PatchUserPermissionsCommand}
+    { userId: string; data: PatchUserPermissionsCommand }
   > = props => {
-    const {userId, data} = props ?? {};
+    const { userId, data } = props ?? {};
 
     return patchApiUserUserIdPermissions(userId, data);
   };
 
-  return {mutationFn, ...mutationOptions};
+  return { mutationFn, ...mutationOptions };
 };
 
 export type PatchApiUserUserIdPermissionsMutationResult = NonNullable<
@@ -2327,13 +2330,13 @@ export const usePatchApiUserUserIdPermissions = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof patchApiUserUserIdPermissions>>,
     TError,
-    {userId: string; data: PatchUserPermissionsCommand},
+    { userId: string; data: PatchUserPermissionsCommand },
     TContext
   >;
 }): UseMutationResult<
   Awaited<ReturnType<typeof patchApiUserUserIdPermissions>>,
   TError,
-  {userId: string; data: PatchUserPermissionsCommand},
+  { userId: string; data: PatchUserPermissionsCommand },
   TContext
 > => {
   const mutationOptions =
@@ -2352,8 +2355,8 @@ export const patchApiV0UserUserIdPermissions = (
 ) => {
   return backendRequest<UserPermissionsResponse>({
     url: `/api/v0/user/${userId}/permissions`,
-    method: 'PATCH',
-    headers: {'Content-Type': 'application/json'},
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
     data: setUserPermissionsCommand,
   });
 };
@@ -2365,27 +2368,27 @@ export const getPatchApiV0UserUserIdPermissionsMutationOptions = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof patchApiV0UserUserIdPermissions>>,
     TError,
-    {userId: string; data: SetUserPermissionsCommand},
+    { userId: string; data: SetUserPermissionsCommand },
     TContext
   >;
 }): UseMutationOptions<
   Awaited<ReturnType<typeof patchApiV0UserUserIdPermissions>>,
   TError,
-  {userId: string; data: SetUserPermissionsCommand},
+  { userId: string; data: SetUserPermissionsCommand },
   TContext
 > => {
-  const {mutation: mutationOptions} = options ?? {};
+  const { mutation: mutationOptions } = options ?? {};
 
   const mutationFn: MutationFunction<
     Awaited<ReturnType<typeof patchApiV0UserUserIdPermissions>>,
-    {userId: string; data: SetUserPermissionsCommand}
+    { userId: string; data: SetUserPermissionsCommand }
   > = props => {
-    const {userId, data} = props ?? {};
+    const { userId, data } = props ?? {};
 
     return patchApiV0UserUserIdPermissions(userId, data);
   };
 
-  return {mutationFn, ...mutationOptions};
+  return { mutationFn, ...mutationOptions };
 };
 
 export type PatchApiV0UserUserIdPermissionsMutationResult = NonNullable<
@@ -2406,13 +2409,13 @@ export const usePatchApiV0UserUserIdPermissions = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof patchApiV0UserUserIdPermissions>>,
     TError,
-    {userId: string; data: SetUserPermissionsCommand},
+    { userId: string; data: SetUserPermissionsCommand },
     TContext
   >;
 }): UseMutationResult<
   Awaited<ReturnType<typeof patchApiV0UserUserIdPermissions>>,
   TError,
-  {userId: string; data: SetUserPermissionsCommand},
+  { userId: string; data: SetUserPermissionsCommand },
   TContext
 > => {
   const mutationOptions =
@@ -2427,7 +2430,7 @@ export const usePatchApiV0UserUserIdPermissions = <
 export const getApiTeamsWithAvailableServices = (signal?: AbortSignal) => {
   return backendRequest<TeamServicesResponse[]>({
     url: `/api/teams/with-available-services`,
-    method: 'GET',
+    method: "GET",
     signal,
   });
 };
@@ -2448,20 +2451,20 @@ export const getGetApiTeamsWithAvailableServicesQueryOptions = <
     >
   >;
 }) => {
-  const {query: queryOptions} = options ?? {};
+  const { query: queryOptions } = options ?? {};
 
   const queryKey =
     queryOptions?.queryKey ?? getGetApiTeamsWithAvailableServicesQueryKey();
 
   const queryFn: QueryFunction<
     Awaited<ReturnType<typeof getApiTeamsWithAvailableServices>>
-  > = ({signal}) => getApiTeamsWithAvailableServices(signal);
+  > = ({ signal }) => getApiTeamsWithAvailableServices(signal);
 
-  return {queryKey, queryFn, ...queryOptions} as UseQueryOptions<
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
     Awaited<ReturnType<typeof getApiTeamsWithAvailableServices>>,
     TError,
     TData
-  > & {queryKey: QueryKey};
+  > & { queryKey: QueryKey };
 };
 
 export type GetApiTeamsWithAvailableServicesQueryResult = NonNullable<
@@ -2486,9 +2489,9 @@ export function useGetApiTeamsWithAvailableServices<
         TError,
         TData
       >,
-      'initialData'
+      "initialData"
     >;
-}): DefinedUseQueryResult<TData, TError> & {queryKey: QueryKey};
+}): DefinedUseQueryResult<TData, TError> & { queryKey: QueryKey };
 export function useGetApiTeamsWithAvailableServices<
   TData = Awaited<ReturnType<typeof getApiTeamsWithAvailableServices>>,
   TError = ErrorResponse,
@@ -2506,9 +2509,9 @@ export function useGetApiTeamsWithAvailableServices<
         TError,
         TData
       >,
-      'initialData'
+      "initialData"
     >;
-}): UseQueryResult<TData, TError> & {queryKey: QueryKey};
+}): UseQueryResult<TData, TError> & { queryKey: QueryKey };
 export function useGetApiTeamsWithAvailableServices<
   TData = Awaited<ReturnType<typeof getApiTeamsWithAvailableServices>>,
   TError = ErrorResponse,
@@ -2520,7 +2523,7 @@ export function useGetApiTeamsWithAvailableServices<
       TData
     >
   >;
-}): UseQueryResult<TData, TError> & {queryKey: QueryKey};
+}): UseQueryResult<TData, TError> & { queryKey: QueryKey };
 /**
  * @summary Get list of teams with available services.
  */
@@ -2536,7 +2539,7 @@ export function useGetApiTeamsWithAvailableServices<
       TData
     >
   >;
-}): UseQueryResult<TData, TError> & {queryKey: QueryKey} {
+}): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
   const queryOptions = getGetApiTeamsWithAvailableServicesQueryOptions(options);
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
@@ -2557,7 +2560,7 @@ export const getApiTeamTeamIdPermissions = (
 ) => {
   return backendRequest<TeamPermissionsResponse[]>({
     url: `/api/team/${teamId}/permissions`,
-    method: 'GET',
+    method: "GET",
     signal,
   });
 };
@@ -2581,14 +2584,14 @@ export const getGetApiTeamTeamIdPermissionsQueryOptions = <
     >;
   },
 ) => {
-  const {query: queryOptions} = options ?? {};
+  const { query: queryOptions } = options ?? {};
 
   const queryKey =
     queryOptions?.queryKey ?? getGetApiTeamTeamIdPermissionsQueryKey(teamId);
 
   const queryFn: QueryFunction<
     Awaited<ReturnType<typeof getApiTeamTeamIdPermissions>>
-  > = ({signal}) => getApiTeamTeamIdPermissions(teamId, signal);
+  > = ({ signal }) => getApiTeamTeamIdPermissions(teamId, signal);
 
   return {
     queryKey,
@@ -2599,7 +2602,7 @@ export const getGetApiTeamTeamIdPermissionsQueryOptions = <
     Awaited<ReturnType<typeof getApiTeamTeamIdPermissions>>,
     TError,
     TData
-  > & {queryKey: QueryKey};
+  > & { queryKey: QueryKey };
 };
 
 export type GetApiTeamTeamIdPermissionsQueryResult = NonNullable<
@@ -2626,10 +2629,10 @@ export function useGetApiTeamTeamIdPermissions<
           TError,
           TData
         >,
-        'initialData'
+        "initialData"
       >;
   },
-): DefinedUseQueryResult<TData, TError> & {queryKey: QueryKey};
+): DefinedUseQueryResult<TData, TError> & { queryKey: QueryKey };
 export function useGetApiTeamTeamIdPermissions<
   TData = Awaited<ReturnType<typeof getApiTeamTeamIdPermissions>>,
   TError = ErrorResponse,
@@ -2649,10 +2652,10 @@ export function useGetApiTeamTeamIdPermissions<
           TError,
           TData
         >,
-        'initialData'
+        "initialData"
       >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey};
+): UseQueryResult<TData, TError> & { queryKey: QueryKey };
 export function useGetApiTeamTeamIdPermissions<
   TData = Awaited<ReturnType<typeof getApiTeamTeamIdPermissions>>,
   TError = ErrorResponse,
@@ -2667,7 +2670,7 @@ export function useGetApiTeamTeamIdPermissions<
       >
     >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey};
+): UseQueryResult<TData, TError> & { queryKey: QueryKey };
 /**
  * @summary Get permissions for spatial team.
  */
@@ -2686,7 +2689,7 @@ export function useGetApiTeamTeamIdPermissions<
       >
     >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey} {
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
   const queryOptions = getGetApiTeamTeamIdPermissionsQueryOptions(
     teamId,
     options,
@@ -2710,8 +2713,8 @@ export const patchApiTeamTeamIdPermissions = (
 ) => {
   return backendRequest<TeamPermissionsResponse>({
     url: `/api/team/${teamId}/permissions`,
-    method: 'PATCH',
-    headers: {'Content-Type': 'application/json'},
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
     data: patchTeamPermissionsCommand,
   });
 };
@@ -2723,27 +2726,27 @@ export const getPatchApiTeamTeamIdPermissionsMutationOptions = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof patchApiTeamTeamIdPermissions>>,
     TError,
-    {teamId: number; data: PatchTeamPermissionsCommand},
+    { teamId: number; data: PatchTeamPermissionsCommand },
     TContext
   >;
 }): UseMutationOptions<
   Awaited<ReturnType<typeof patchApiTeamTeamIdPermissions>>,
   TError,
-  {teamId: number; data: PatchTeamPermissionsCommand},
+  { teamId: number; data: PatchTeamPermissionsCommand },
   TContext
 > => {
-  const {mutation: mutationOptions} = options ?? {};
+  const { mutation: mutationOptions } = options ?? {};
 
   const mutationFn: MutationFunction<
     Awaited<ReturnType<typeof patchApiTeamTeamIdPermissions>>,
-    {teamId: number; data: PatchTeamPermissionsCommand}
+    { teamId: number; data: PatchTeamPermissionsCommand }
   > = props => {
-    const {teamId, data} = props ?? {};
+    const { teamId, data } = props ?? {};
 
     return patchApiTeamTeamIdPermissions(teamId, data);
   };
 
-  return {mutationFn, ...mutationOptions};
+  return { mutationFn, ...mutationOptions };
 };
 
 export type PatchApiTeamTeamIdPermissionsMutationResult = NonNullable<
@@ -2763,13 +2766,13 @@ export const usePatchApiTeamTeamIdPermissions = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof patchApiTeamTeamIdPermissions>>,
     TError,
-    {teamId: number; data: PatchTeamPermissionsCommand},
+    { teamId: number; data: PatchTeamPermissionsCommand },
     TContext
   >;
 }): UseMutationResult<
   Awaited<ReturnType<typeof patchApiTeamTeamIdPermissions>>,
   TError,
-  {teamId: number; data: PatchTeamPermissionsCommand},
+  { teamId: number; data: PatchTeamPermissionsCommand },
   TContext
 > => {
   const mutationOptions =
@@ -2788,8 +2791,8 @@ export const patchApiV0TeamTeamIdPermissions = (
 ) => {
   return backendRequest<TeamPermissionsResponse>({
     url: `/api/v0/team/${teamId}/permissions`,
-    method: 'PATCH',
-    headers: {'Content-Type': 'application/json'},
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
     data: setTeamPermissionsCommand,
   });
 };
@@ -2801,27 +2804,27 @@ export const getPatchApiV0TeamTeamIdPermissionsMutationOptions = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof patchApiV0TeamTeamIdPermissions>>,
     TError,
-    {teamId: number; data: SetTeamPermissionsCommand},
+    { teamId: number; data: SetTeamPermissionsCommand },
     TContext
   >;
 }): UseMutationOptions<
   Awaited<ReturnType<typeof patchApiV0TeamTeamIdPermissions>>,
   TError,
-  {teamId: number; data: SetTeamPermissionsCommand},
+  { teamId: number; data: SetTeamPermissionsCommand },
   TContext
 > => {
-  const {mutation: mutationOptions} = options ?? {};
+  const { mutation: mutationOptions } = options ?? {};
 
   const mutationFn: MutationFunction<
     Awaited<ReturnType<typeof patchApiV0TeamTeamIdPermissions>>,
-    {teamId: number; data: SetTeamPermissionsCommand}
+    { teamId: number; data: SetTeamPermissionsCommand }
   > = props => {
-    const {teamId, data} = props ?? {};
+    const { teamId, data } = props ?? {};
 
     return patchApiV0TeamTeamIdPermissions(teamId, data);
   };
 
-  return {mutationFn, ...mutationOptions};
+  return { mutationFn, ...mutationOptions };
 };
 
 export type PatchApiV0TeamTeamIdPermissionsMutationResult = NonNullable<
@@ -2842,13 +2845,13 @@ export const usePatchApiV0TeamTeamIdPermissions = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof patchApiV0TeamTeamIdPermissions>>,
     TError,
-    {teamId: number; data: SetTeamPermissionsCommand},
+    { teamId: number; data: SetTeamPermissionsCommand },
     TContext
   >;
 }): UseMutationResult<
   Awaited<ReturnType<typeof patchApiV0TeamTeamIdPermissions>>,
   TError,
-  {teamId: number; data: SetTeamPermissionsCommand},
+  { teamId: number; data: SetTeamPermissionsCommand },
   TContext
 > => {
   const mutationOptions =
@@ -2866,8 +2869,8 @@ export const patchApiUserUserIdServicesAccessPermission = (
 ) => {
   return backendRequest<UserPermissionsResponse>({
     url: `/api/user/${userId}/services/access-permission`,
-    method: 'PATCH',
-    headers: {'Content-Type': 'application/json'},
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
     data: patchAccessUserPermissionsCommand,
   });
 };
@@ -2879,27 +2882,27 @@ export const getPatchApiUserUserIdServicesAccessPermissionMutationOptions = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof patchApiUserUserIdServicesAccessPermission>>,
     TError,
-    {userId: string; data: PatchAccessUserPermissionsCommand},
+    { userId: string; data: PatchAccessUserPermissionsCommand },
     TContext
   >;
 }): UseMutationOptions<
   Awaited<ReturnType<typeof patchApiUserUserIdServicesAccessPermission>>,
   TError,
-  {userId: string; data: PatchAccessUserPermissionsCommand},
+  { userId: string; data: PatchAccessUserPermissionsCommand },
   TContext
 > => {
-  const {mutation: mutationOptions} = options ?? {};
+  const { mutation: mutationOptions } = options ?? {};
 
   const mutationFn: MutationFunction<
     Awaited<ReturnType<typeof patchApiUserUserIdServicesAccessPermission>>,
-    {userId: string; data: PatchAccessUserPermissionsCommand}
+    { userId: string; data: PatchAccessUserPermissionsCommand }
   > = props => {
-    const {userId, data} = props ?? {};
+    const { userId, data } = props ?? {};
 
     return patchApiUserUserIdServicesAccessPermission(userId, data);
   };
 
-  return {mutationFn, ...mutationOptions};
+  return { mutationFn, ...mutationOptions };
 };
 
 export type PatchApiUserUserIdServicesAccessPermissionMutationResult =
@@ -2921,13 +2924,13 @@ export const usePatchApiUserUserIdServicesAccessPermission = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof patchApiUserUserIdServicesAccessPermission>>,
     TError,
-    {userId: string; data: PatchAccessUserPermissionsCommand},
+    { userId: string; data: PatchAccessUserPermissionsCommand },
     TContext
   >;
 }): UseMutationResult<
   Awaited<ReturnType<typeof patchApiUserUserIdServicesAccessPermission>>,
   TError,
-  {userId: string; data: PatchAccessUserPermissionsCommand},
+  { userId: string; data: PatchAccessUserPermissionsCommand },
   TContext
 > => {
   const mutationOptions =
@@ -2945,8 +2948,8 @@ export const patchApiTeamTeamIdServicesAccessPermission = (
 ) => {
   return backendRequest<TeamPermissionsResponse>({
     url: `/api/team/${teamId}/services/access-permission`,
-    method: 'PATCH',
-    headers: {'Content-Type': 'application/json'},
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
     data: patchAccessTeamPermissionsCommand,
   });
 };
@@ -2958,27 +2961,27 @@ export const getPatchApiTeamTeamIdServicesAccessPermissionMutationOptions = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof patchApiTeamTeamIdServicesAccessPermission>>,
     TError,
-    {teamId: number; data: PatchAccessTeamPermissionsCommand},
+    { teamId: number; data: PatchAccessTeamPermissionsCommand },
     TContext
   >;
 }): UseMutationOptions<
   Awaited<ReturnType<typeof patchApiTeamTeamIdServicesAccessPermission>>,
   TError,
-  {teamId: number; data: PatchAccessTeamPermissionsCommand},
+  { teamId: number; data: PatchAccessTeamPermissionsCommand },
   TContext
 > => {
-  const {mutation: mutationOptions} = options ?? {};
+  const { mutation: mutationOptions } = options ?? {};
 
   const mutationFn: MutationFunction<
     Awaited<ReturnType<typeof patchApiTeamTeamIdServicesAccessPermission>>,
-    {teamId: number; data: PatchAccessTeamPermissionsCommand}
+    { teamId: number; data: PatchAccessTeamPermissionsCommand }
   > = props => {
-    const {teamId, data} = props ?? {};
+    const { teamId, data } = props ?? {};
 
     return patchApiTeamTeamIdServicesAccessPermission(teamId, data);
   };
 
-  return {mutationFn, ...mutationOptions};
+  return { mutationFn, ...mutationOptions };
 };
 
 export type PatchApiTeamTeamIdServicesAccessPermissionMutationResult =
@@ -3000,13 +3003,13 @@ export const usePatchApiTeamTeamIdServicesAccessPermission = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof patchApiTeamTeamIdServicesAccessPermission>>,
     TError,
-    {teamId: number; data: PatchAccessTeamPermissionsCommand},
+    { teamId: number; data: PatchAccessTeamPermissionsCommand },
     TContext
   >;
 }): UseMutationResult<
   Awaited<ReturnType<typeof patchApiTeamTeamIdServicesAccessPermission>>,
   TError,
-  {teamId: number; data: PatchAccessTeamPermissionsCommand},
+  { teamId: number; data: PatchAccessTeamPermissionsCommand },
   TContext
 > => {
   const mutationOptions =
@@ -3021,7 +3024,7 @@ export const usePatchApiTeamTeamIdServicesAccessPermission = <
 export const getApiProfileId = (id: string, signal?: AbortSignal) => {
   return backendRequest<ProfileResponse>({
     url: `/api/profile/${id}`,
-    method: 'GET',
+    method: "GET",
     signal,
   });
 };
@@ -3045,7 +3048,7 @@ export const getGetApiProfileIdQueryOptions = <
     >;
   },
 ) => {
-  const {query: queryOptions} = options ?? {};
+  const { query: queryOptions } = options ?? {};
 
   const queryKey = queryOptions?.queryKey ?? getGetApiProfileIdQueryKey(id);
 
@@ -3053,11 +3056,16 @@ export const getGetApiProfileIdQueryOptions = <
     signal,
   }) => getApiProfileId(id, signal);
 
-  return {queryKey, queryFn, enabled: !!id, ...queryOptions} as UseQueryOptions<
+  return {
+    queryKey,
+    queryFn,
+    enabled: !!id,
+    ...queryOptions,
+  } as UseQueryOptions<
     Awaited<ReturnType<typeof getApiProfileId>>,
     TError,
     TData
-  > & {queryKey: QueryKey};
+  > & { queryKey: QueryKey };
 };
 
 export type GetApiProfileIdQueryResult = NonNullable<
@@ -3084,10 +3092,10 @@ export function useGetApiProfileId<
           TError,
           TData
         >,
-        'initialData'
+        "initialData"
       >;
   },
-): DefinedUseQueryResult<TData, TError> & {queryKey: QueryKey};
+): DefinedUseQueryResult<TData, TError> & { queryKey: QueryKey };
 export function useGetApiProfileId<
   TData = Awaited<ReturnType<typeof getApiProfileId>>,
   TError = ErrorResponse,
@@ -3107,10 +3115,10 @@ export function useGetApiProfileId<
           TError,
           TData
         >,
-        'initialData'
+        "initialData"
       >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey};
+): UseQueryResult<TData, TError> & { queryKey: QueryKey };
 export function useGetApiProfileId<
   TData = Awaited<ReturnType<typeof getApiProfileId>>,
   TError = ErrorResponse,
@@ -3125,7 +3133,7 @@ export function useGetApiProfileId<
       >
     >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey};
+): UseQueryResult<TData, TError> & { queryKey: QueryKey };
 /**
  * @summary Return profile info by user id.
  */
@@ -3144,7 +3152,7 @@ export function useGetApiProfileId<
       >
     >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey} {
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
   const queryOptions = getGetApiProfileIdQueryOptions(id, options);
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
@@ -3162,7 +3170,7 @@ export function useGetApiProfileId<
 export const getApiProfileMe = (signal?: AbortSignal) => {
   return backendRequest<MyProfileResponse | void>({
     url: `/api/profile/me`,
-    method: 'GET',
+    method: "GET",
     signal,
   });
 };
@@ -3179,7 +3187,7 @@ export const getGetApiProfileMeQueryOptions = <
     UseQueryOptions<Awaited<ReturnType<typeof getApiProfileMe>>, TError, TData>
   >;
 }) => {
-  const {query: queryOptions} = options ?? {};
+  const { query: queryOptions } = options ?? {};
 
   const queryKey = queryOptions?.queryKey ?? getGetApiProfileMeQueryKey();
 
@@ -3187,11 +3195,11 @@ export const getGetApiProfileMeQueryOptions = <
     signal,
   }) => getApiProfileMe(signal);
 
-  return {queryKey, queryFn, ...queryOptions} as UseQueryOptions<
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
     Awaited<ReturnType<typeof getApiProfileMe>>,
     TError,
     TData
-  > & {queryKey: QueryKey};
+  > & { queryKey: QueryKey };
 };
 
 export type GetApiProfileMeQueryResult = NonNullable<
@@ -3212,9 +3220,9 @@ export function useGetApiProfileMe<
         TError,
         TData
       >,
-      'initialData'
+      "initialData"
     >;
-}): DefinedUseQueryResult<TData, TError> & {queryKey: QueryKey};
+}): DefinedUseQueryResult<TData, TError> & { queryKey: QueryKey };
 export function useGetApiProfileMe<
   TData = Awaited<ReturnType<typeof getApiProfileMe>>,
   TError = ErrorResponse,
@@ -3228,9 +3236,9 @@ export function useGetApiProfileMe<
         TError,
         TData
       >,
-      'initialData'
+      "initialData"
     >;
-}): UseQueryResult<TData, TError> & {queryKey: QueryKey};
+}): UseQueryResult<TData, TError> & { queryKey: QueryKey };
 export function useGetApiProfileMe<
   TData = Awaited<ReturnType<typeof getApiProfileMe>>,
   TError = ErrorResponse,
@@ -3238,7 +3246,7 @@ export function useGetApiProfileMe<
   query?: Partial<
     UseQueryOptions<Awaited<ReturnType<typeof getApiProfileMe>>, TError, TData>
   >;
-}): UseQueryResult<TData, TError> & {queryKey: QueryKey};
+}): UseQueryResult<TData, TError> & { queryKey: QueryKey };
 /**
  * @summary Return profile for the current user.
  */
@@ -3250,7 +3258,7 @@ export function useGetApiProfileMe<
   query?: Partial<
     UseQueryOptions<Awaited<ReturnType<typeof getApiProfileMe>>, TError, TData>
   >;
-}): UseQueryResult<TData, TError> & {queryKey: QueryKey} {
+}): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
   const queryOptions = getGetApiProfileMeQueryOptions(options);
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
@@ -3271,7 +3279,7 @@ export const getApiProfileSearch = (
 ) => {
   return backendRequest<ProfileSearchResponse[]>({
     url: `/api/profile/search`,
-    method: 'GET',
+    method: "GET",
     params,
     signal,
   });
@@ -3298,20 +3306,20 @@ export const getGetApiProfileSearchQueryOptions = <
     >;
   },
 ) => {
-  const {query: queryOptions} = options ?? {};
+  const { query: queryOptions } = options ?? {};
 
   const queryKey =
     queryOptions?.queryKey ?? getGetApiProfileSearchQueryKey(params);
 
   const queryFn: QueryFunction<
     Awaited<ReturnType<typeof getApiProfileSearch>>
-  > = ({signal}) => getApiProfileSearch(params, signal);
+  > = ({ signal }) => getApiProfileSearch(params, signal);
 
-  return {queryKey, queryFn, ...queryOptions} as UseQueryOptions<
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
     Awaited<ReturnType<typeof getApiProfileSearch>>,
     TError,
     TData
-  > & {queryKey: QueryKey};
+  > & { queryKey: QueryKey };
 };
 
 export type GetApiProfileSearchQueryResult = NonNullable<
@@ -3338,10 +3346,10 @@ export function useGetApiProfileSearch<
           TError,
           TData
         >,
-        'initialData'
+        "initialData"
       >;
   },
-): DefinedUseQueryResult<TData, TError> & {queryKey: QueryKey};
+): DefinedUseQueryResult<TData, TError> & { queryKey: QueryKey };
 export function useGetApiProfileSearch<
   TData = Awaited<ReturnType<typeof getApiProfileSearch>>,
   TError = ErrorResponse,
@@ -3361,10 +3369,10 @@ export function useGetApiProfileSearch<
           TError,
           TData
         >,
-        'initialData'
+        "initialData"
       >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey};
+): UseQueryResult<TData, TError> & { queryKey: QueryKey };
 export function useGetApiProfileSearch<
   TData = Awaited<ReturnType<typeof getApiProfileSearch>>,
   TError = ErrorResponse,
@@ -3379,7 +3387,7 @@ export function useGetApiProfileSearch<
       >
     >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey};
+): UseQueryResult<TData, TError> & { queryKey: QueryKey };
 /**
  * @summary Search users by email or first name and last name.
  */
@@ -3398,7 +3406,7 @@ export function useGetApiProfileSearch<
       >
     >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey} {
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
   const queryOptions = getGetApiProfileSearchQueryOptions(params, options);
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
@@ -3421,7 +3429,7 @@ export const getApiProfileList = (
 ) => {
   return backendRequest<ProfileSearchResponsePaginationResponse>({
     url: `/api/profile/list`,
-    method: 'GET',
+    method: "GET",
     params,
     signal,
   });
@@ -3448,20 +3456,20 @@ export const getGetApiProfileListQueryOptions = <
     >;
   },
 ) => {
-  const {query: queryOptions} = options ?? {};
+  const { query: queryOptions } = options ?? {};
 
   const queryKey =
     queryOptions?.queryKey ?? getGetApiProfileListQueryKey(params);
 
   const queryFn: QueryFunction<
     Awaited<ReturnType<typeof getApiProfileList>>
-  > = ({signal}) => getApiProfileList(params, signal);
+  > = ({ signal }) => getApiProfileList(params, signal);
 
-  return {queryKey, queryFn, ...queryOptions} as UseQueryOptions<
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
     Awaited<ReturnType<typeof getApiProfileList>>,
     TError,
     TData
-  > & {queryKey: QueryKey};
+  > & { queryKey: QueryKey };
 };
 
 export type GetApiProfileListQueryResult = NonNullable<
@@ -3488,10 +3496,10 @@ export function useGetApiProfileList<
           TError,
           TData
         >,
-        'initialData'
+        "initialData"
       >;
   },
-): DefinedUseQueryResult<TData, TError> & {queryKey: QueryKey};
+): DefinedUseQueryResult<TData, TError> & { queryKey: QueryKey };
 export function useGetApiProfileList<
   TData = Awaited<ReturnType<typeof getApiProfileList>>,
   TError = ErrorResponse,
@@ -3511,10 +3519,10 @@ export function useGetApiProfileList<
           TError,
           TData
         >,
-        'initialData'
+        "initialData"
       >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey};
+): UseQueryResult<TData, TError> & { queryKey: QueryKey };
 export function useGetApiProfileList<
   TData = Awaited<ReturnType<typeof getApiProfileList>>,
   TError = ErrorResponse,
@@ -3529,7 +3537,7 @@ export function useGetApiProfileList<
       >
     >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey};
+): UseQueryResult<TData, TError> & { queryKey: QueryKey };
 /**
  * @deprecated
  * @summary Return paginated list of user profiles.
@@ -3549,7 +3557,7 @@ export function useGetApiProfileList<
       >
     >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey} {
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
   const queryOptions = getGetApiProfileListQueryOptions(params, options);
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
@@ -3571,7 +3579,7 @@ export const getApiProfileIdAvatar = (
 ) => {
   return backendRequest<void>({
     url: `/api/profile/${id}/avatar`,
-    method: 'GET',
+    method: "GET",
     params,
     signal,
   });
@@ -3600,20 +3608,25 @@ export const getGetApiProfileIdAvatarQueryOptions = <
     >;
   },
 ) => {
-  const {query: queryOptions} = options ?? {};
+  const { query: queryOptions } = options ?? {};
 
   const queryKey =
     queryOptions?.queryKey ?? getGetApiProfileIdAvatarQueryKey(id, params);
 
   const queryFn: QueryFunction<
     Awaited<ReturnType<typeof getApiProfileIdAvatar>>
-  > = ({signal}) => getApiProfileIdAvatar(id, params, signal);
+  > = ({ signal }) => getApiProfileIdAvatar(id, params, signal);
 
-  return {queryKey, queryFn, enabled: !!id, ...queryOptions} as UseQueryOptions<
+  return {
+    queryKey,
+    queryFn,
+    enabled: !!id,
+    ...queryOptions,
+  } as UseQueryOptions<
     Awaited<ReturnType<typeof getApiProfileIdAvatar>>,
     TError,
     TData
-  > & {queryKey: QueryKey};
+  > & { queryKey: QueryKey };
 };
 
 export type GetApiProfileIdAvatarQueryResult = NonNullable<
@@ -3641,10 +3654,10 @@ export function useGetApiProfileIdAvatar<
           TError,
           TData
         >,
-        'initialData'
+        "initialData"
       >;
   },
-): DefinedUseQueryResult<TData, TError> & {queryKey: QueryKey};
+): DefinedUseQueryResult<TData, TError> & { queryKey: QueryKey };
 export function useGetApiProfileIdAvatar<
   TData = Awaited<ReturnType<typeof getApiProfileIdAvatar>>,
   TError = ErrorResponse,
@@ -3665,10 +3678,10 @@ export function useGetApiProfileIdAvatar<
           TError,
           TData
         >,
-        'initialData'
+        "initialData"
       >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey};
+): UseQueryResult<TData, TError> & { queryKey: QueryKey };
 export function useGetApiProfileIdAvatar<
   TData = Awaited<ReturnType<typeof getApiProfileIdAvatar>>,
   TError = ErrorResponse,
@@ -3684,7 +3697,7 @@ export function useGetApiProfileIdAvatar<
       >
     >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey};
+): UseQueryResult<TData, TError> & { queryKey: QueryKey };
 /**
  * @summary Returns an avatar for the specified user profile id and image size.
  */
@@ -3704,7 +3717,7 @@ export function useGetApiProfileIdAvatar<
       >
     >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey} {
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
   const queryOptions = getGetApiProfileIdAvatarQueryOptions(
     id,
     params,
@@ -3730,7 +3743,7 @@ export const getApiProfileIdAvatarUrl = (
 ) => {
   return backendRequest<ProfileAvatarResponse>({
     url: `/api/profile/${id}/avatar/url`,
-    method: 'GET',
+    method: "GET",
     params,
     signal,
   });
@@ -3762,20 +3775,25 @@ export const getGetApiProfileIdAvatarUrlQueryOptions = <
     >;
   },
 ) => {
-  const {query: queryOptions} = options ?? {};
+  const { query: queryOptions } = options ?? {};
 
   const queryKey =
     queryOptions?.queryKey ?? getGetApiProfileIdAvatarUrlQueryKey(id, params);
 
   const queryFn: QueryFunction<
     Awaited<ReturnType<typeof getApiProfileIdAvatarUrl>>
-  > = ({signal}) => getApiProfileIdAvatarUrl(id, params, signal);
+  > = ({ signal }) => getApiProfileIdAvatarUrl(id, params, signal);
 
-  return {queryKey, queryFn, enabled: !!id, ...queryOptions} as UseQueryOptions<
+  return {
+    queryKey,
+    queryFn,
+    enabled: !!id,
+    ...queryOptions,
+  } as UseQueryOptions<
     Awaited<ReturnType<typeof getApiProfileIdAvatarUrl>>,
     TError,
     TData
-  > & {queryKey: QueryKey};
+  > & { queryKey: QueryKey };
 };
 
 export type GetApiProfileIdAvatarUrlQueryResult = NonNullable<
@@ -3803,10 +3821,10 @@ export function useGetApiProfileIdAvatarUrl<
           TError,
           TData
         >,
-        'initialData'
+        "initialData"
       >;
   },
-): DefinedUseQueryResult<TData, TError> & {queryKey: QueryKey};
+): DefinedUseQueryResult<TData, TError> & { queryKey: QueryKey };
 export function useGetApiProfileIdAvatarUrl<
   TData = Awaited<ReturnType<typeof getApiProfileIdAvatarUrl>>,
   TError = ErrorResponse,
@@ -3827,10 +3845,10 @@ export function useGetApiProfileIdAvatarUrl<
           TError,
           TData
         >,
-        'initialData'
+        "initialData"
       >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey};
+): UseQueryResult<TData, TError> & { queryKey: QueryKey };
 export function useGetApiProfileIdAvatarUrl<
   TData = Awaited<ReturnType<typeof getApiProfileIdAvatarUrl>>,
   TError = ErrorResponse,
@@ -3846,7 +3864,7 @@ export function useGetApiProfileIdAvatarUrl<
       >
     >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey};
+): UseQueryResult<TData, TError> & { queryKey: QueryKey };
 /**
  * @summary Returns an avatar for the specified user profile id and image size.
  */
@@ -3866,7 +3884,7 @@ export function useGetApiProfileIdAvatarUrl<
       >
     >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey} {
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
   const queryOptions = getGetApiProfileIdAvatarUrlQueryOptions(
     id,
     params,
@@ -3892,7 +3910,7 @@ export const getApiProfileEmailAvatar = (
 ) => {
   return backendRequest<void>({
     url: `/api/profile/${email}/avatar`,
-    method: 'GET',
+    method: "GET",
     params,
     signal,
   });
@@ -3921,7 +3939,7 @@ export const getGetApiProfileEmailAvatarQueryOptions = <
     >;
   },
 ) => {
-  const {query: queryOptions} = options ?? {};
+  const { query: queryOptions } = options ?? {};
 
   const queryKey =
     queryOptions?.queryKey ??
@@ -3929,7 +3947,7 @@ export const getGetApiProfileEmailAvatarQueryOptions = <
 
   const queryFn: QueryFunction<
     Awaited<ReturnType<typeof getApiProfileEmailAvatar>>
-  > = ({signal}) => getApiProfileEmailAvatar(email, params, signal);
+  > = ({ signal }) => getApiProfileEmailAvatar(email, params, signal);
 
   return {
     queryKey,
@@ -3940,7 +3958,7 @@ export const getGetApiProfileEmailAvatarQueryOptions = <
     Awaited<ReturnType<typeof getApiProfileEmailAvatar>>,
     TError,
     TData
-  > & {queryKey: QueryKey};
+  > & { queryKey: QueryKey };
 };
 
 export type GetApiProfileEmailAvatarQueryResult = NonNullable<
@@ -3968,10 +3986,10 @@ export function useGetApiProfileEmailAvatar<
           TError,
           TData
         >,
-        'initialData'
+        "initialData"
       >;
   },
-): DefinedUseQueryResult<TData, TError> & {queryKey: QueryKey};
+): DefinedUseQueryResult<TData, TError> & { queryKey: QueryKey };
 export function useGetApiProfileEmailAvatar<
   TData = Awaited<ReturnType<typeof getApiProfileEmailAvatar>>,
   TError = ErrorResponse,
@@ -3992,10 +4010,10 @@ export function useGetApiProfileEmailAvatar<
           TError,
           TData
         >,
-        'initialData'
+        "initialData"
       >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey};
+): UseQueryResult<TData, TError> & { queryKey: QueryKey };
 export function useGetApiProfileEmailAvatar<
   TData = Awaited<ReturnType<typeof getApiProfileEmailAvatar>>,
   TError = ErrorResponse,
@@ -4011,7 +4029,7 @@ export function useGetApiProfileEmailAvatar<
       >
     >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey};
+): UseQueryResult<TData, TError> & { queryKey: QueryKey };
 /**
  * @summary Returns an avatar for the specified email address and image size.
  */
@@ -4031,7 +4049,7 @@ export function useGetApiProfileEmailAvatar<
       >
     >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey} {
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
   const queryOptions = getGetApiProfileEmailAvatarQueryOptions(
     email,
     params,
@@ -4057,7 +4075,7 @@ export const getApiProfileEmailAvatarUrl = (
 ) => {
   return backendRequest<ProfileAvatarResponse>({
     url: `/api/profile/${email}/avatar/url`,
-    method: 'GET',
+    method: "GET",
     params,
     signal,
   });
@@ -4089,7 +4107,7 @@ export const getGetApiProfileEmailAvatarUrlQueryOptions = <
     >;
   },
 ) => {
-  const {query: queryOptions} = options ?? {};
+  const { query: queryOptions } = options ?? {};
 
   const queryKey =
     queryOptions?.queryKey ??
@@ -4097,7 +4115,7 @@ export const getGetApiProfileEmailAvatarUrlQueryOptions = <
 
   const queryFn: QueryFunction<
     Awaited<ReturnType<typeof getApiProfileEmailAvatarUrl>>
-  > = ({signal}) => getApiProfileEmailAvatarUrl(email, params, signal);
+  > = ({ signal }) => getApiProfileEmailAvatarUrl(email, params, signal);
 
   return {
     queryKey,
@@ -4108,7 +4126,7 @@ export const getGetApiProfileEmailAvatarUrlQueryOptions = <
     Awaited<ReturnType<typeof getApiProfileEmailAvatarUrl>>,
     TError,
     TData
-  > & {queryKey: QueryKey};
+  > & { queryKey: QueryKey };
 };
 
 export type GetApiProfileEmailAvatarUrlQueryResult = NonNullable<
@@ -4136,10 +4154,10 @@ export function useGetApiProfileEmailAvatarUrl<
           TError,
           TData
         >,
-        'initialData'
+        "initialData"
       >;
   },
-): DefinedUseQueryResult<TData, TError> & {queryKey: QueryKey};
+): DefinedUseQueryResult<TData, TError> & { queryKey: QueryKey };
 export function useGetApiProfileEmailAvatarUrl<
   TData = Awaited<ReturnType<typeof getApiProfileEmailAvatarUrl>>,
   TError = ErrorResponse,
@@ -4160,10 +4178,10 @@ export function useGetApiProfileEmailAvatarUrl<
           TError,
           TData
         >,
-        'initialData'
+        "initialData"
       >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey};
+): UseQueryResult<TData, TError> & { queryKey: QueryKey };
 export function useGetApiProfileEmailAvatarUrl<
   TData = Awaited<ReturnType<typeof getApiProfileEmailAvatarUrl>>,
   TError = ErrorResponse,
@@ -4179,7 +4197,7 @@ export function useGetApiProfileEmailAvatarUrl<
       >
     >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey};
+): UseQueryResult<TData, TError> & { queryKey: QueryKey };
 /**
  * @summary Returns an avatar for the specified email address and image size.
  */
@@ -4199,7 +4217,7 @@ export function useGetApiProfileEmailAvatarUrl<
       >
     >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey} {
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
   const queryOptions = getGetApiProfileEmailAvatarUrlQueryOptions(
     email,
     params,
@@ -4224,7 +4242,7 @@ export const getApiProfile = (
 ) => {
   return backendRequest<EmployeeInfoWithBalanceResponse>({
     url: `/api/profile`,
-    method: 'GET',
+    method: "GET",
     params,
     signal,
   });
@@ -4245,7 +4263,7 @@ export const getGetApiProfileQueryOptions = <
     >;
   },
 ) => {
-  const {query: queryOptions} = options ?? {};
+  const { query: queryOptions } = options ?? {};
 
   const queryKey = queryOptions?.queryKey ?? getGetApiProfileQueryKey(params);
 
@@ -4253,11 +4271,11 @@ export const getGetApiProfileQueryOptions = <
     signal,
   }) => getApiProfile(params, signal);
 
-  return {queryKey, queryFn, ...queryOptions} as UseQueryOptions<
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
     Awaited<ReturnType<typeof getApiProfile>>,
     TError,
     TData
-  > & {queryKey: QueryKey};
+  > & { queryKey: QueryKey };
 };
 
 export type GetApiProfileQueryResult = NonNullable<
@@ -4280,10 +4298,10 @@ export function useGetApiProfile<
           TError,
           TData
         >,
-        'initialData'
+        "initialData"
       >;
   },
-): DefinedUseQueryResult<TData, TError> & {queryKey: QueryKey};
+): DefinedUseQueryResult<TData, TError> & { queryKey: QueryKey };
 export function useGetApiProfile<
   TData = Awaited<ReturnType<typeof getApiProfile>>,
   TError = ErrorResponse,
@@ -4299,10 +4317,10 @@ export function useGetApiProfile<
           TError,
           TData
         >,
-        'initialData'
+        "initialData"
       >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey};
+): UseQueryResult<TData, TError> & { queryKey: QueryKey };
 export function useGetApiProfile<
   TData = Awaited<ReturnType<typeof getApiProfile>>,
   TError = ErrorResponse,
@@ -4313,7 +4331,7 @@ export function useGetApiProfile<
       UseQueryOptions<Awaited<ReturnType<typeof getApiProfile>>, TError, TData>
     >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey};
+): UseQueryResult<TData, TError> & { queryKey: QueryKey };
 /**
  * @summary Returns profile info by email.
  */
@@ -4328,7 +4346,7 @@ export function useGetApiProfile<
       UseQueryOptions<Awaited<ReturnType<typeof getApiProfile>>, TError, TData>
     >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey} {
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
   const queryOptions = getGetApiProfileQueryOptions(params, options);
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
@@ -4346,7 +4364,7 @@ export function useGetApiProfile<
 export const getApiProjectList = (signal?: AbortSignal) => {
   return backendRequest<ProjectResponse[]>({
     url: `/api/project/list`,
-    method: 'GET',
+    method: "GET",
     signal,
   });
 };
@@ -4367,19 +4385,19 @@ export const getGetApiProjectListQueryOptions = <
     >
   >;
 }) => {
-  const {query: queryOptions} = options ?? {};
+  const { query: queryOptions } = options ?? {};
 
   const queryKey = queryOptions?.queryKey ?? getGetApiProjectListQueryKey();
 
   const queryFn: QueryFunction<
     Awaited<ReturnType<typeof getApiProjectList>>
-  > = ({signal}) => getApiProjectList(signal);
+  > = ({ signal }) => getApiProjectList(signal);
 
-  return {queryKey, queryFn, ...queryOptions} as UseQueryOptions<
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
     Awaited<ReturnType<typeof getApiProjectList>>,
     TError,
     TData
-  > & {queryKey: QueryKey};
+  > & { queryKey: QueryKey };
 };
 
 export type GetApiProjectListQueryResult = NonNullable<
@@ -4404,9 +4422,9 @@ export function useGetApiProjectList<
         TError,
         TData
       >,
-      'initialData'
+      "initialData"
     >;
-}): DefinedUseQueryResult<TData, TError> & {queryKey: QueryKey};
+}): DefinedUseQueryResult<TData, TError> & { queryKey: QueryKey };
 export function useGetApiProjectList<
   TData = Awaited<ReturnType<typeof getApiProjectList>>,
   TError = unknown,
@@ -4424,9 +4442,9 @@ export function useGetApiProjectList<
         TError,
         TData
       >,
-      'initialData'
+      "initialData"
     >;
-}): UseQueryResult<TData, TError> & {queryKey: QueryKey};
+}): UseQueryResult<TData, TError> & { queryKey: QueryKey };
 export function useGetApiProjectList<
   TData = Awaited<ReturnType<typeof getApiProjectList>>,
   TError = unknown,
@@ -4438,7 +4456,7 @@ export function useGetApiProjectList<
       TData
     >
   >;
-}): UseQueryResult<TData, TError> & {queryKey: QueryKey};
+}): UseQueryResult<TData, TError> & { queryKey: QueryKey };
 /**
  * @summary Get list of projects.
  */
@@ -4454,7 +4472,7 @@ export function useGetApiProjectList<
       TData
     >
   >;
-}): UseQueryResult<TData, TError> & {queryKey: QueryKey} {
+}): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
   const queryOptions = getGetApiProjectListQueryOptions(options);
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
@@ -4474,8 +4492,8 @@ export const postApiPromocodesPickup = (
 ) => {
   return backendRequest<PickUpPromoCodeResponse>({
     url: `/api/promocodes/pickup`,
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
     data: pickUpPromoCodeCommand,
   });
 };
@@ -4487,27 +4505,27 @@ export const getPostApiPromocodesPickupMutationOptions = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof postApiPromocodesPickup>>,
     TError,
-    {data: PickUpPromoCodeCommand},
+    { data: PickUpPromoCodeCommand },
     TContext
   >;
 }): UseMutationOptions<
   Awaited<ReturnType<typeof postApiPromocodesPickup>>,
   TError,
-  {data: PickUpPromoCodeCommand},
+  { data: PickUpPromoCodeCommand },
   TContext
 > => {
-  const {mutation: mutationOptions} = options ?? {};
+  const { mutation: mutationOptions } = options ?? {};
 
   const mutationFn: MutationFunction<
     Awaited<ReturnType<typeof postApiPromocodesPickup>>,
-    {data: PickUpPromoCodeCommand}
+    { data: PickUpPromoCodeCommand }
   > = props => {
-    const {data} = props ?? {};
+    const { data } = props ?? {};
 
     return postApiPromocodesPickup(data);
   };
 
-  return {mutationFn, ...mutationOptions};
+  return { mutationFn, ...mutationOptions };
 };
 
 export type PostApiPromocodesPickupMutationResult = NonNullable<
@@ -4526,13 +4544,13 @@ export const usePostApiPromocodesPickup = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof postApiPromocodesPickup>>,
     TError,
-    {data: PickUpPromoCodeCommand},
+    { data: PickUpPromoCodeCommand },
     TContext
   >;
 }): UseMutationResult<
   Awaited<ReturnType<typeof postApiPromocodesPickup>>,
   TError,
-  {data: PickUpPromoCodeCommand},
+  { data: PickUpPromoCodeCommand },
   TContext
 > => {
   const mutationOptions = getPostApiPromocodesPickupMutationOptions(options);
@@ -4546,8 +4564,8 @@ export const usePostApiPromocodesPickup = <
 export const postApiServices = (createServiceCommand: CreateServiceCommand) => {
   return backendRequest<ServiceResponse>({
     url: `/api/services`,
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
     data: createServiceCommand,
   });
 };
@@ -4559,27 +4577,27 @@ export const getPostApiServicesMutationOptions = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof postApiServices>>,
     TError,
-    {data: CreateServiceCommand},
+    { data: CreateServiceCommand },
     TContext
   >;
 }): UseMutationOptions<
   Awaited<ReturnType<typeof postApiServices>>,
   TError,
-  {data: CreateServiceCommand},
+  { data: CreateServiceCommand },
   TContext
 > => {
-  const {mutation: mutationOptions} = options ?? {};
+  const { mutation: mutationOptions } = options ?? {};
 
   const mutationFn: MutationFunction<
     Awaited<ReturnType<typeof postApiServices>>,
-    {data: CreateServiceCommand}
+    { data: CreateServiceCommand }
   > = props => {
-    const {data} = props ?? {};
+    const { data } = props ?? {};
 
     return postApiServices(data);
   };
 
-  return {mutationFn, ...mutationOptions};
+  return { mutationFn, ...mutationOptions };
 };
 
 export type PostApiServicesMutationResult = NonNullable<
@@ -4598,13 +4616,13 @@ export const usePostApiServices = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof postApiServices>>,
     TError,
-    {data: CreateServiceCommand},
+    { data: CreateServiceCommand },
     TContext
   >;
 }): UseMutationResult<
   Awaited<ReturnType<typeof postApiServices>>,
   TError,
-  {data: CreateServiceCommand},
+  { data: CreateServiceCommand },
   TContext
 > => {
   const mutationOptions = getPostApiServicesMutationOptions(options);
@@ -4620,8 +4638,8 @@ export const deleteApiServices = (
 ) => {
   return backendRequest<void>({
     url: `/api/services`,
-    method: 'DELETE',
-    headers: {'Content-Type': 'application/json'},
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
     data: deleteServicesCommand,
   });
 };
@@ -4633,27 +4651,27 @@ export const getDeleteApiServicesMutationOptions = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof deleteApiServices>>,
     TError,
-    {data: DeleteServicesCommand},
+    { data: DeleteServicesCommand },
     TContext
   >;
 }): UseMutationOptions<
   Awaited<ReturnType<typeof deleteApiServices>>,
   TError,
-  {data: DeleteServicesCommand},
+  { data: DeleteServicesCommand },
   TContext
 > => {
-  const {mutation: mutationOptions} = options ?? {};
+  const { mutation: mutationOptions } = options ?? {};
 
   const mutationFn: MutationFunction<
     Awaited<ReturnType<typeof deleteApiServices>>,
-    {data: DeleteServicesCommand}
+    { data: DeleteServicesCommand }
   > = props => {
-    const {data} = props ?? {};
+    const { data } = props ?? {};
 
     return deleteApiServices(data);
   };
 
-  return {mutationFn, ...mutationOptions};
+  return { mutationFn, ...mutationOptions };
 };
 
 export type DeleteApiServicesMutationResult = NonNullable<
@@ -4672,13 +4690,13 @@ export const useDeleteApiServices = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof deleteApiServices>>,
     TError,
-    {data: DeleteServicesCommand},
+    { data: DeleteServicesCommand },
     TContext
   >;
 }): UseMutationResult<
   Awaited<ReturnType<typeof deleteApiServices>>,
   TError,
-  {data: DeleteServicesCommand},
+  { data: DeleteServicesCommand },
   TContext
 > => {
   const mutationOptions = getDeleteApiServicesMutationOptions(options);
@@ -4692,7 +4710,7 @@ export const useDeleteApiServices = <
 export const getApiServices = (signal?: AbortSignal) => {
   return backendRequest<ServiceResponse[]>({
     url: `/api/services`,
-    method: 'GET',
+    method: "GET",
     signal,
   });
 };
@@ -4709,7 +4727,7 @@ export const getGetApiServicesQueryOptions = <
     UseQueryOptions<Awaited<ReturnType<typeof getApiServices>>, TError, TData>
   >;
 }) => {
-  const {query: queryOptions} = options ?? {};
+  const { query: queryOptions } = options ?? {};
 
   const queryKey = queryOptions?.queryKey ?? getGetApiServicesQueryKey();
 
@@ -4717,11 +4735,11 @@ export const getGetApiServicesQueryOptions = <
     signal,
   }) => getApiServices(signal);
 
-  return {queryKey, queryFn, ...queryOptions} as UseQueryOptions<
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
     Awaited<ReturnType<typeof getApiServices>>,
     TError,
     TData
-  > & {queryKey: QueryKey};
+  > & { queryKey: QueryKey };
 };
 
 export type GetApiServicesQueryResult = NonNullable<
@@ -4742,9 +4760,9 @@ export function useGetApiServices<
         TError,
         TData
       >,
-      'initialData'
+      "initialData"
     >;
-}): DefinedUseQueryResult<TData, TError> & {queryKey: QueryKey};
+}): DefinedUseQueryResult<TData, TError> & { queryKey: QueryKey };
 export function useGetApiServices<
   TData = Awaited<ReturnType<typeof getApiServices>>,
   TError = ErrorResponse,
@@ -4758,9 +4776,9 @@ export function useGetApiServices<
         TError,
         TData
       >,
-      'initialData'
+      "initialData"
     >;
-}): UseQueryResult<TData, TError> & {queryKey: QueryKey};
+}): UseQueryResult<TData, TError> & { queryKey: QueryKey };
 export function useGetApiServices<
   TData = Awaited<ReturnType<typeof getApiServices>>,
   TError = ErrorResponse,
@@ -4768,7 +4786,7 @@ export function useGetApiServices<
   query?: Partial<
     UseQueryOptions<Awaited<ReturnType<typeof getApiServices>>, TError, TData>
   >;
-}): UseQueryResult<TData, TError> & {queryKey: QueryKey};
+}): UseQueryResult<TData, TError> & { queryKey: QueryKey };
 /**
  * @summary Get list of services.
  */
@@ -4780,7 +4798,7 @@ export function useGetApiServices<
   query?: Partial<
     UseQueryOptions<Awaited<ReturnType<typeof getApiServices>>, TError, TData>
   >;
-}): UseQueryResult<TData, TError> & {queryKey: QueryKey} {
+}): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
   const queryOptions = getGetApiServicesQueryOptions(options);
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
@@ -4798,7 +4816,7 @@ export function useGetApiServices<
 export const deleteApiServicesId = (id: number) => {
   return backendRequest<ServiceResponse>({
     url: `/api/services/${id}`,
-    method: 'DELETE',
+    method: "DELETE",
   });
 };
 
@@ -4809,27 +4827,27 @@ export const getDeleteApiServicesIdMutationOptions = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof deleteApiServicesId>>,
     TError,
-    {id: number},
+    { id: number },
     TContext
   >;
 }): UseMutationOptions<
   Awaited<ReturnType<typeof deleteApiServicesId>>,
   TError,
-  {id: number},
+  { id: number },
   TContext
 > => {
-  const {mutation: mutationOptions} = options ?? {};
+  const { mutation: mutationOptions } = options ?? {};
 
   const mutationFn: MutationFunction<
     Awaited<ReturnType<typeof deleteApiServicesId>>,
-    {id: number}
+    { id: number }
   > = props => {
-    const {id} = props ?? {};
+    const { id } = props ?? {};
 
     return deleteApiServicesId(id);
   };
 
-  return {mutationFn, ...mutationOptions};
+  return { mutationFn, ...mutationOptions };
 };
 
 export type DeleteApiServicesIdMutationResult = NonNullable<
@@ -4848,13 +4866,13 @@ export const useDeleteApiServicesId = <
   mutation?: UseMutationOptions<
     Awaited<ReturnType<typeof deleteApiServicesId>>,
     TError,
-    {id: number},
+    { id: number },
     TContext
   >;
 }): UseMutationResult<
   Awaited<ReturnType<typeof deleteApiServicesId>>,
   TError,
-  {id: number},
+  { id: number },
   TContext
 > => {
   const mutationOptions = getDeleteApiServicesIdMutationOptions(options);
@@ -4868,7 +4886,7 @@ export const useDeleteApiServicesId = <
 export const getApiTeams = (signal?: AbortSignal) => {
   return backendRequest<TeamResponse[]>({
     url: `/api/teams`,
-    method: 'GET',
+    method: "GET",
     signal,
   });
 };
@@ -4885,7 +4903,7 @@ export const getGetApiTeamsQueryOptions = <
     UseQueryOptions<Awaited<ReturnType<typeof getApiTeams>>, TError, TData>
   >;
 }) => {
-  const {query: queryOptions} = options ?? {};
+  const { query: queryOptions } = options ?? {};
 
   const queryKey = queryOptions?.queryKey ?? getGetApiTeamsQueryKey();
 
@@ -4893,11 +4911,11 @@ export const getGetApiTeamsQueryOptions = <
     signal,
   }) => getApiTeams(signal);
 
-  return {queryKey, queryFn, ...queryOptions} as UseQueryOptions<
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
     Awaited<ReturnType<typeof getApiTeams>>,
     TError,
     TData
-  > & {queryKey: QueryKey};
+  > & { queryKey: QueryKey };
 };
 
 export type GetApiTeamsQueryResult = NonNullable<
@@ -4918,9 +4936,9 @@ export function useGetApiTeams<
         TError,
         TData
       >,
-      'initialData'
+      "initialData"
     >;
-}): DefinedUseQueryResult<TData, TError> & {queryKey: QueryKey};
+}): DefinedUseQueryResult<TData, TError> & { queryKey: QueryKey };
 export function useGetApiTeams<
   TData = Awaited<ReturnType<typeof getApiTeams>>,
   TError = ErrorResponse,
@@ -4934,9 +4952,9 @@ export function useGetApiTeams<
         TError,
         TData
       >,
-      'initialData'
+      "initialData"
     >;
-}): UseQueryResult<TData, TError> & {queryKey: QueryKey};
+}): UseQueryResult<TData, TError> & { queryKey: QueryKey };
 export function useGetApiTeams<
   TData = Awaited<ReturnType<typeof getApiTeams>>,
   TError = ErrorResponse,
@@ -4944,7 +4962,7 @@ export function useGetApiTeams<
   query?: Partial<
     UseQueryOptions<Awaited<ReturnType<typeof getApiTeams>>, TError, TData>
   >;
-}): UseQueryResult<TData, TError> & {queryKey: QueryKey};
+}): UseQueryResult<TData, TError> & { queryKey: QueryKey };
 /**
  * @summary Gets the list of teams.
  */
@@ -4956,7 +4974,7 @@ export function useGetApiTeams<
   query?: Partial<
     UseQueryOptions<Awaited<ReturnType<typeof getApiTeams>>, TError, TData>
   >;
-}): UseQueryResult<TData, TError> & {queryKey: QueryKey} {
+}): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
   const queryOptions = getGetApiTeamsQueryOptions(options);
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
@@ -4981,7 +4999,7 @@ export const getApiTransactionsMy = (
 ) => {
   return backendRequest<TransactionResponsePaginationResponse>({
     url: `/api/transactions/my`,
-    method: 'GET',
+    method: "GET",
     params,
     signal,
   });
@@ -5008,20 +5026,20 @@ export const getGetApiTransactionsMyQueryOptions = <
     >;
   },
 ) => {
-  const {query: queryOptions} = options ?? {};
+  const { query: queryOptions } = options ?? {};
 
   const queryKey =
     queryOptions?.queryKey ?? getGetApiTransactionsMyQueryKey(params);
 
   const queryFn: QueryFunction<
     Awaited<ReturnType<typeof getApiTransactionsMy>>
-  > = ({signal}) => getApiTransactionsMy(params, signal);
+  > = ({ signal }) => getApiTransactionsMy(params, signal);
 
-  return {queryKey, queryFn, ...queryOptions} as UseQueryOptions<
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
     Awaited<ReturnType<typeof getApiTransactionsMy>>,
     TError,
     TData
-  > & {queryKey: QueryKey};
+  > & { queryKey: QueryKey };
 };
 
 export type GetApiTransactionsMyQueryResult = NonNullable<
@@ -5048,10 +5066,10 @@ export function useGetApiTransactionsMy<
           TError,
           TData
         >,
-        'initialData'
+        "initialData"
       >;
   },
-): DefinedUseQueryResult<TData, TError> & {queryKey: QueryKey};
+): DefinedUseQueryResult<TData, TError> & { queryKey: QueryKey };
 export function useGetApiTransactionsMy<
   TData = Awaited<ReturnType<typeof getApiTransactionsMy>>,
   TError = ErrorResponse,
@@ -5071,10 +5089,10 @@ export function useGetApiTransactionsMy<
           TError,
           TData
         >,
-        'initialData'
+        "initialData"
       >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey};
+): UseQueryResult<TData, TError> & { queryKey: QueryKey };
 export function useGetApiTransactionsMy<
   TData = Awaited<ReturnType<typeof getApiTransactionsMy>>,
   TError = ErrorResponse,
@@ -5089,7 +5107,7 @@ export function useGetApiTransactionsMy<
       >
     >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey};
+): UseQueryResult<TData, TError> & { queryKey: QueryKey };
 /**
  * @summary Returns list of transactions for the current user.
  */
@@ -5108,7 +5126,7 @@ export function useGetApiTransactionsMy<
       >
     >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey} {
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
   const queryOptions = getGetApiTransactionsMyQueryOptions(params, options);
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
@@ -5133,7 +5151,7 @@ export const getApiTransactions = (
 ) => {
   return backendRequest<TransactionResponsePaginationResponse>({
     url: `/api/transactions`,
-    method: 'GET',
+    method: "GET",
     params,
     signal,
   });
@@ -5160,20 +5178,20 @@ export const getGetApiTransactionsQueryOptions = <
     >;
   },
 ) => {
-  const {query: queryOptions} = options ?? {};
+  const { query: queryOptions } = options ?? {};
 
   const queryKey =
     queryOptions?.queryKey ?? getGetApiTransactionsQueryKey(params);
 
   const queryFn: QueryFunction<
     Awaited<ReturnType<typeof getApiTransactions>>
-  > = ({signal}) => getApiTransactions(params, signal);
+  > = ({ signal }) => getApiTransactions(params, signal);
 
-  return {queryKey, queryFn, ...queryOptions} as UseQueryOptions<
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
     Awaited<ReturnType<typeof getApiTransactions>>,
     TError,
     TData
-  > & {queryKey: QueryKey};
+  > & { queryKey: QueryKey };
 };
 
 export type GetApiTransactionsQueryResult = NonNullable<
@@ -5200,10 +5218,10 @@ export function useGetApiTransactions<
           TError,
           TData
         >,
-        'initialData'
+        "initialData"
       >;
   },
-): DefinedUseQueryResult<TData, TError> & {queryKey: QueryKey};
+): DefinedUseQueryResult<TData, TError> & { queryKey: QueryKey };
 export function useGetApiTransactions<
   TData = Awaited<ReturnType<typeof getApiTransactions>>,
   TError = ErrorResponse,
@@ -5223,10 +5241,10 @@ export function useGetApiTransactions<
           TError,
           TData
         >,
-        'initialData'
+        "initialData"
       >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey};
+): UseQueryResult<TData, TError> & { queryKey: QueryKey };
 export function useGetApiTransactions<
   TData = Awaited<ReturnType<typeof getApiTransactions>>,
   TError = ErrorResponse,
@@ -5241,7 +5259,7 @@ export function useGetApiTransactions<
       >
     >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey};
+): UseQueryResult<TData, TError> & { queryKey: QueryKey };
 /**
  * @summary Return list of transactions for the specified user.
  */
@@ -5260,7 +5278,7 @@ export function useGetApiTransactions<
       >
     >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey} {
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
   const queryOptions = getGetApiTransactionsQueryOptions(params, options);
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
@@ -5281,7 +5299,7 @@ export const getApiVacancies = (
 ) => {
   return backendRequest<VacancyItemResponse[]>({
     url: `/api/vacancies`,
-    method: 'GET',
+    method: "GET",
     params,
     signal,
   });
@@ -5306,7 +5324,7 @@ export const getGetApiVacanciesQueryOptions = <
     >;
   },
 ) => {
-  const {query: queryOptions} = options ?? {};
+  const { query: queryOptions } = options ?? {};
 
   const queryKey = queryOptions?.queryKey ?? getGetApiVacanciesQueryKey(params);
 
@@ -5314,11 +5332,11 @@ export const getGetApiVacanciesQueryOptions = <
     signal,
   }) => getApiVacancies(params, signal);
 
-  return {queryKey, queryFn, ...queryOptions} as UseQueryOptions<
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
     Awaited<ReturnType<typeof getApiVacancies>>,
     TError,
     TData
-  > & {queryKey: QueryKey};
+  > & { queryKey: QueryKey };
 };
 
 export type GetApiVacanciesQueryResult = NonNullable<
@@ -5345,10 +5363,10 @@ export function useGetApiVacancies<
           TError,
           TData
         >,
-        'initialData'
+        "initialData"
       >;
   },
-): DefinedUseQueryResult<TData, TError> & {queryKey: QueryKey};
+): DefinedUseQueryResult<TData, TError> & { queryKey: QueryKey };
 export function useGetApiVacancies<
   TData = Awaited<ReturnType<typeof getApiVacancies>>,
   TError = unknown,
@@ -5368,10 +5386,10 @@ export function useGetApiVacancies<
           TError,
           TData
         >,
-        'initialData'
+        "initialData"
       >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey};
+): UseQueryResult<TData, TError> & { queryKey: QueryKey };
 export function useGetApiVacancies<
   TData = Awaited<ReturnType<typeof getApiVacancies>>,
   TError = unknown,
@@ -5386,7 +5404,7 @@ export function useGetApiVacancies<
       >
     >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey};
+): UseQueryResult<TData, TError> & { queryKey: QueryKey };
 /**
  * @summary Returns list of vacancies.
  */
@@ -5405,7 +5423,7 @@ export function useGetApiVacancies<
       >
     >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey} {
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
   const queryOptions = getGetApiVacanciesQueryOptions(params, options);
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
@@ -5426,7 +5444,7 @@ export const getApiVacanciesHot = (
 ) => {
   return backendRequest<VacancyItemResponse[]>({
     url: `/api/vacancies/hot`,
-    method: 'GET',
+    method: "GET",
     params,
     signal,
   });
@@ -5453,20 +5471,20 @@ export const getGetApiVacanciesHotQueryOptions = <
     >;
   },
 ) => {
-  const {query: queryOptions} = options ?? {};
+  const { query: queryOptions } = options ?? {};
 
   const queryKey =
     queryOptions?.queryKey ?? getGetApiVacanciesHotQueryKey(params);
 
   const queryFn: QueryFunction<
     Awaited<ReturnType<typeof getApiVacanciesHot>>
-  > = ({signal}) => getApiVacanciesHot(params, signal);
+  > = ({ signal }) => getApiVacanciesHot(params, signal);
 
-  return {queryKey, queryFn, ...queryOptions} as UseQueryOptions<
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
     Awaited<ReturnType<typeof getApiVacanciesHot>>,
     TError,
     TData
-  > & {queryKey: QueryKey};
+  > & { queryKey: QueryKey };
 };
 
 export type GetApiVacanciesHotQueryResult = NonNullable<
@@ -5493,10 +5511,10 @@ export function useGetApiVacanciesHot<
           TError,
           TData
         >,
-        'initialData'
+        "initialData"
       >;
   },
-): DefinedUseQueryResult<TData, TError> & {queryKey: QueryKey};
+): DefinedUseQueryResult<TData, TError> & { queryKey: QueryKey };
 export function useGetApiVacanciesHot<
   TData = Awaited<ReturnType<typeof getApiVacanciesHot>>,
   TError = unknown,
@@ -5516,10 +5534,10 @@ export function useGetApiVacanciesHot<
           TError,
           TData
         >,
-        'initialData'
+        "initialData"
       >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey};
+): UseQueryResult<TData, TError> & { queryKey: QueryKey };
 export function useGetApiVacanciesHot<
   TData = Awaited<ReturnType<typeof getApiVacanciesHot>>,
   TError = unknown,
@@ -5534,7 +5552,7 @@ export function useGetApiVacanciesHot<
       >
     >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey};
+): UseQueryResult<TData, TError> & { queryKey: QueryKey };
 /**
  * @summary Returns list of hot vacancies.
  */
@@ -5553,7 +5571,7 @@ export function useGetApiVacanciesHot<
       >
     >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey} {
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
   const queryOptions = getGetApiVacanciesHotQueryOptions(params, options);
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
@@ -5571,7 +5589,7 @@ export function useGetApiVacanciesHot<
 export const getApiVacanciesId = (id: string, signal?: AbortSignal) => {
   return backendRequest<VacancyResponse>({
     url: `/api/vacancies/${id}`,
-    method: 'GET',
+    method: "GET",
     signal,
   });
 };
@@ -5595,19 +5613,24 @@ export const getGetApiVacanciesIdQueryOptions = <
     >;
   },
 ) => {
-  const {query: queryOptions} = options ?? {};
+  const { query: queryOptions } = options ?? {};
 
   const queryKey = queryOptions?.queryKey ?? getGetApiVacanciesIdQueryKey(id);
 
   const queryFn: QueryFunction<
     Awaited<ReturnType<typeof getApiVacanciesId>>
-  > = ({signal}) => getApiVacanciesId(id, signal);
+  > = ({ signal }) => getApiVacanciesId(id, signal);
 
-  return {queryKey, queryFn, enabled: !!id, ...queryOptions} as UseQueryOptions<
+  return {
+    queryKey,
+    queryFn,
+    enabled: !!id,
+    ...queryOptions,
+  } as UseQueryOptions<
     Awaited<ReturnType<typeof getApiVacanciesId>>,
     TError,
     TData
-  > & {queryKey: QueryKey};
+  > & { queryKey: QueryKey };
 };
 
 export type GetApiVacanciesIdQueryResult = NonNullable<
@@ -5634,10 +5657,10 @@ export function useGetApiVacanciesId<
           TError,
           TData
         >,
-        'initialData'
+        "initialData"
       >;
   },
-): DefinedUseQueryResult<TData, TError> & {queryKey: QueryKey};
+): DefinedUseQueryResult<TData, TError> & { queryKey: QueryKey };
 export function useGetApiVacanciesId<
   TData = Awaited<ReturnType<typeof getApiVacanciesId>>,
   TError = ErrorResponse,
@@ -5657,10 +5680,10 @@ export function useGetApiVacanciesId<
           TError,
           TData
         >,
-        'initialData'
+        "initialData"
       >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey};
+): UseQueryResult<TData, TError> & { queryKey: QueryKey };
 export function useGetApiVacanciesId<
   TData = Awaited<ReturnType<typeof getApiVacanciesId>>,
   TError = ErrorResponse,
@@ -5675,7 +5698,7 @@ export function useGetApiVacanciesId<
       >
     >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey};
+): UseQueryResult<TData, TError> & { queryKey: QueryKey };
 /**
  * @summary Returns detailed info of vacancy by Id.
  */
@@ -5694,7 +5717,7 @@ export function useGetApiVacanciesId<
       >
     >;
   },
-): UseQueryResult<TData, TError> & {queryKey: QueryKey} {
+): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
   const queryOptions = getGetApiVacanciesIdQueryOptions(id, options);
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
@@ -5710,7 +5733,7 @@ export function useGetApiVacanciesId<
  * @summary Returns current version of API.
  */
 export const getApiVersion = (signal?: AbortSignal) => {
-  return backendRequest<string>({url: `/api/version`, method: 'GET', signal});
+  return backendRequest<string>({ url: `/api/version`, method: "GET", signal });
 };
 
 export const getGetApiVersionQueryKey = () => {
@@ -5725,7 +5748,7 @@ export const getGetApiVersionQueryOptions = <
     UseQueryOptions<Awaited<ReturnType<typeof getApiVersion>>, TError, TData>
   >;
 }) => {
-  const {query: queryOptions} = options ?? {};
+  const { query: queryOptions } = options ?? {};
 
   const queryKey = queryOptions?.queryKey ?? getGetApiVersionQueryKey();
 
@@ -5733,11 +5756,11 @@ export const getGetApiVersionQueryOptions = <
     signal,
   }) => getApiVersion(signal);
 
-  return {queryKey, queryFn, ...queryOptions} as UseQueryOptions<
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
     Awaited<ReturnType<typeof getApiVersion>>,
     TError,
     TData
-  > & {queryKey: QueryKey};
+  > & { queryKey: QueryKey };
 };
 
 export type GetApiVersionQueryResult = NonNullable<
@@ -5758,9 +5781,9 @@ export function useGetApiVersion<
         TError,
         TData
       >,
-      'initialData'
+      "initialData"
     >;
-}): DefinedUseQueryResult<TData, TError> & {queryKey: QueryKey};
+}): DefinedUseQueryResult<TData, TError> & { queryKey: QueryKey };
 export function useGetApiVersion<
   TData = Awaited<ReturnType<typeof getApiVersion>>,
   TError = unknown,
@@ -5774,9 +5797,9 @@ export function useGetApiVersion<
         TError,
         TData
       >,
-      'initialData'
+      "initialData"
     >;
-}): UseQueryResult<TData, TError> & {queryKey: QueryKey};
+}): UseQueryResult<TData, TError> & { queryKey: QueryKey };
 export function useGetApiVersion<
   TData = Awaited<ReturnType<typeof getApiVersion>>,
   TError = unknown,
@@ -5784,7 +5807,7 @@ export function useGetApiVersion<
   query?: Partial<
     UseQueryOptions<Awaited<ReturnType<typeof getApiVersion>>, TError, TData>
   >;
-}): UseQueryResult<TData, TError> & {queryKey: QueryKey};
+}): UseQueryResult<TData, TError> & { queryKey: QueryKey };
 /**
  * @summary Returns current version of API.
  */
@@ -5796,7 +5819,7 @@ export function useGetApiVersion<
   query?: Partial<
     UseQueryOptions<Awaited<ReturnType<typeof getApiVersion>>, TError, TData>
   >;
-}): UseQueryResult<TData, TError> & {queryKey: QueryKey} {
+}): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
   const queryOptions = getGetApiVersionQueryOptions(options);
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {

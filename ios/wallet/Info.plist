@@ -58,9 +58,7 @@
 	<false/>
 	<key>UIAppFonts</key>
 	<array>
-		<string>InterMedium.ttf</string>
-		<string>InterRegular.ttf</string>
-		<string>InterSemiBold.ttf</string>
+		<string>Inter.ttf</string>
 	</array>
 </dict>
 </plist>

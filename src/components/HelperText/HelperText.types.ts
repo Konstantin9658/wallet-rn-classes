@@ -1,4 +1,4 @@
-export type TypeOfHelperText = 'error' | 'hint';
+export type TypeOfHelperText = "error" | "hint";
 
 export interface HelperTextProps {
   type: TypeOfHelperText;

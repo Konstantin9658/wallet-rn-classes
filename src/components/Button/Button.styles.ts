@@ -1,10 +1,10 @@
-import {Colors} from 'constants/Colors';
-import {FontFamilies} from 'constants/Fonts';
-import {FontSize, LineHeight} from 'constants/Typography';
-import {StyleSheet} from 'react-native';
+import { Colors } from "constants/Colors";
+import { FontSize, LineHeight } from "constants/Typography";
+import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   button: {
+    minWidth: 180,
     backgroundColor: Colors.primary100,
     paddingHorizontal: 28,
     paddingVertical: 13,
@@ -28,6 +28,7 @@ export const styles = StyleSheet.create({
     fontSize: FontSize.fs14,
     lineHeight: LineHeight.lh22,
     color: Colors.white100,
-    fontFamily: FontFamilies.INTER.medium,
+    fontFamily: "Inter",
+    fontWeight: "500",
   },
 });

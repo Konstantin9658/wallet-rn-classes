@@ -1,6 +1,6 @@
-import axios, {AxiosRequestConfig} from 'axios';
-import {API_BASE_URL} from 'config/config';
-import {applyAuthInterceptors} from './authInterceptor';
+import axios, { AxiosRequestConfig } from "axios";
+import { API_BASE_URL } from "config/config";
+import { applyAuthInterceptors } from "./authInterceptor";
 
 const axiosInstance = axios.create();
 applyAuthInterceptors(axiosInstance);
@@ -13,7 +13,7 @@ export const backendRequest = <T>(config: AxiosRequestConfig): Promise<T> => {
     cancelToken: source.token,
     timeout: 60000,
   })
-    .then(({data}) => data)
+    .then(({ data }) => data)
     .catch(error => {
       if (axios.isAxiosError(error)) {
         return Promise.reject(error);
@@ -23,7 +23,7 @@ export const backendRequest = <T>(config: AxiosRequestConfig): Promise<T> => {
 
   Object.assign(promise, {
     cancel: () => {
-      source.cancel('Query was cancelled by React Query');
+      source.cancel("Query was cancelled by React Query");
     },
   });
 

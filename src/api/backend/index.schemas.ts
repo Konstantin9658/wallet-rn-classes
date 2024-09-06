@@ -192,11 +192,10 @@ export interface TransferCoinsCommand {
 export type TransactionType =
   (typeof TransactionType)[keyof typeof TransactionType];
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
 export const TransactionType = {
-  Debit: 'Debit',
-  Credit: 'Credit',
-  Transfer: 'Transfer',
+  Debit: "Debit",
+  Credit: "Credit",
+  Transfer: "Transfer",
 } as const;
 
 export interface TransactionResponse {
@@ -247,17 +246,15 @@ export interface TeamPermissionsResponse {
 
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder];
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
 export const SortOrder = {
-  Ascending: 'Ascending',
-  Descending: 'Descending',
+  Ascending: "Ascending",
+  Descending: "Descending",
 } as const;
 
 export type SortBy = (typeof SortBy)[keyof typeof SortBy];
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
 export const SortBy = {
-  Date: 'Date',
+  Date: "Date",
 } as const;
 
 export interface SetUserPermissionsCommand {
@@ -310,10 +307,9 @@ export interface ServiceAvailabilityDto {
 export type ScopeRegionEnum =
   (typeof ScopeRegionEnum)[keyof typeof ScopeRegionEnum];
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
 export const ScopeRegionEnum = {
-  Ru: 'Ru',
-  Int: 'Int',
+  Ru: "Ru",
+  Int: "Int",
 } as const;
 
 export interface RegisterClientCommand {
@@ -338,10 +334,9 @@ export interface RedeemCoinsCommand {
 export type PublicKeyOutput =
   (typeof PublicKeyOutput)[keyof typeof PublicKeyOutput];
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
 export const PublicKeyOutput = {
-  String: 'String',
-  JWK: 'JWK',
+  String: "String",
+  JWK: "JWK",
 } as const;
 
 export interface ProjectResponse {
@@ -454,7 +449,9 @@ export interface PaginationContext {
 /**
  * @nullable
  */
-export type MyProfileResponseServices = {[key: string]: string[] | null} | null;
+export type MyProfileResponseServices = {
+  [key: string]: string[] | null;
+} | null;
 
 export interface MyProfileResponse {
   balance?: number;
@@ -513,11 +510,10 @@ export interface JwtResponse {
 
 export type ImageSize = (typeof ImageSize)[keyof typeof ImageSize];
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
 export const ImageSize = {
-  Thumbnail: 'Thumbnail',
-  Middle: 'Middle',
-  Original: 'Original',
+  Thumbnail: "Thumbnail",
+  Middle: "Middle",
+  Original: "Original",
 } as const;
 
 export interface GetUsersMostRecentAssignmentsCommand {

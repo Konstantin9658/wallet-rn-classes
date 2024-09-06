@@ -1,11 +1,11 @@
-import React from 'react';
-import { Text, View } from 'react-native';
-import LoginLogo from './images/login-logo.svg';
-import { styles } from './LoginScreen.styles';
-import { Button } from 'components/Button/Button';
-import { useCredentials } from 'services/credentials';
-import { usePostApiAccountSsoGoogle } from 'api/backend';
-import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import React from "react";
+import { Text, View } from "react-native";
+import LoginLogo from "./images/login-logo.svg";
+import { styles } from "./LoginScreen.styles";
+import { Button } from "components/Button/Button";
+import { useCredentials } from "services/credentials";
+import { usePostApiAccountSsoGoogle } from "api/backend";
+import { GoogleSignin } from "@react-native-google-signin/google-signin";
 
 export const LoginScreen = () => {
   const [_, setCredentials] = useCredentials();
@@ -31,7 +31,7 @@ export const LoginScreen = () => {
           This is an internal project for Mercury team. Please, log in with your
           corporate Google account.
         </Text>
-        <Button label='Log in with Google' onPress={signIn} />
+        <Button label="Log in with Google" onPress={signIn} />
       </View>
     </View>
   );

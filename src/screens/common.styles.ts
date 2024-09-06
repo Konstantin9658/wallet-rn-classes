@@ -1,9 +1,8 @@
 import { Colors } from "constants/Colors";
-import { FontFamilies } from "constants/Fonts";
 import { FontSize, LineHeight } from "constants/Typography";
 import { StyleSheet } from "react-native";
 
-export const commonStyles = StyleSheet.create({
+export const screensCommonStyles = StyleSheet.create({
   container: {
     paddingTop: 27,
     paddingBottom: 56,
@@ -19,13 +18,16 @@ export const commonStyles = StyleSheet.create({
     height: 120,
   },
   title: {
+    fontFamily: "Inter",
+    fontWeight: "600",
     fontSize: FontSize.fs20,
     lineHeight: LineHeight.lh30,
     color: Colors.dark80,
     marginBottom: 8,
   },
   description: {
-    fontFamily: FontFamilies.INTER.regular,
+    fontFamily: "Inter",
+    fontWeight: "400",
     fontSize: FontSize.fs16,
     lineHeight: LineHeight.lh24,
     textAlign: "center",

@@ -1,6 +1,6 @@
-import axios, {AxiosInstance, InternalAxiosRequestConfig} from "axios";
-import {tokenRefresher} from "./tokenRefresher";
-import {credentials} from "services/credentials";
+import axios, { AxiosInstance, InternalAxiosRequestConfig } from "axios";
+import { tokenRefresher } from "./tokenRefresher";
+import { credentials } from "services/credentials";
 
 export const applyAuthInterceptors = (axiosInstance: AxiosInstance) => {
   const requestOnFulfilled = async (config: InternalAxiosRequestConfig) => {

@@ -1,15 +1,15 @@
-import {Colors} from 'constants/Colors';
-import {FontFamilies} from 'constants/Fonts';
-import {FontSize, LineHeight} from 'constants/Typography';
-import {StyleSheet} from 'react-native';
+import { Colors } from "constants/Colors";
+import { FontSize, LineHeight } from "constants/Typography";
+import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   text: {
-    position: 'absolute',
-    bottom: -17,
+    position: "absolute",
+    bottom: -20,
     fontSize: FontSize.fs13,
     lineHeight: LineHeight.lh20,
-    fontFamily: FontFamilies.INTER.regular,
+    fontFamily: "Inter",
+    fontWeight: "400",
   },
   text_error: {
     color: Colors.red,

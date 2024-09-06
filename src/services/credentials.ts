@@ -1,6 +1,6 @@
-import {JwtWithRefreshResponse} from 'api/backend/index.schemas';
-import * as yup from 'yup';
-import { makeStorage, useStorage } from './storage';
+import { JwtWithRefreshResponse } from "api/backend/index.schemas";
+import * as yup from "yup";
+import { makeStorage, useStorage } from "./storage";
 
 const CredentialsSchema: yup.ObjectSchema<JwtWithRefreshResponse> = yup
   .object()
@@ -13,6 +13,6 @@ const CredentialsSchema: yup.ObjectSchema<JwtWithRefreshResponse> = yup
     refreshTokenExpiresIn: yup.number(),
   });
 
-export const credentials = makeStorage(CredentialsSchema, 'credentials');
+export const credentials = makeStorage(CredentialsSchema, "credentials");
 
 export const useCredentials = () => useStorage(credentials);
