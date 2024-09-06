@@ -1,6 +1,5 @@
-import {Colors} from 'constants/Colors';
-import {FontFamilies} from 'constants/Fonts';
-import {StyleSheet} from 'react-native';
+import { Colors } from "constants/Colors";
+import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   input: {
@@ -10,7 +9,8 @@ export const styles = StyleSheet.create({
     borderColor: Colors.neutral40,
     backgroundColor: Colors.neutral20,
     color: Colors.dark80,
-    fontFamily: FontFamilies.INTER.regular,
+    fontFamily: "Inter",
+    fontWeight: "400",
     paddingHorizontal: 12,
     paddingVertical: 9,
   },

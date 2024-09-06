@@ -1,5 +1,5 @@
-import {JwtWithRefreshResponse} from 'api/backend/index.schemas';
-import {postApiAccountRefresh} from 'api/backend';
+import { JwtWithRefreshResponse } from "api/backend/index.schemas";
+import { postApiAccountRefresh } from "api/backend";
 
 class TokenRefresher {
   private isRefreshing = false;
@@ -19,7 +19,7 @@ class TokenRefresher {
     }
 
     this.isRefreshing = true;
-    this.refreshPromise = postApiAccountRefresh({token})
+    this.refreshPromise = postApiAccountRefresh({ token })
       .catch(() => null)
       .finally(() => {
         this.isRefreshing = false;

@@ -1,7 +1,6 @@
-import {Colors} from "constants/Colors";
-import {FontFamilies} from "constants/Fonts";
-import {FontSize, LineHeight} from "constants/Typography";
-import {StyleSheet} from "react-native";
+import { Colors } from "constants/Colors";
+import { FontSize, LineHeight } from "constants/Typography";
+import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   container: {
@@ -25,7 +24,8 @@ export const styles = StyleSheet.create({
     marginBottom: 8,
   },
   description: {
-    fontFamily: FontFamilies.INTER.regular,
+    fontFamily: "Inter",
+    fontWeight: "400",
     fontSize: FontSize.fs16,
     lineHeight: LineHeight.lh24,
     textAlign: "center",

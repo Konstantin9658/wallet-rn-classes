@@ -1,14 +1,19 @@
 module.exports = {
   root: true,
-  extends: "@react-native",
-  plugins: ["prettier", "react", "react-native"],
+  plugins: [
+    "prettier",
+    "react",
+    "react-native",
+    "@typescript-eslint",
+    "react-hooks",
+  ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
     ecmaVersion: 2019,
     sourceType: "module",
     project: ["tsconfig.json"],
   },
-  ignorePatterns: ["babel.config.js"],
+  ignorePatterns: ["babel.config.js", ".eslintrc.js", ".prettierrc.js"],
   extends: ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
   rules: {
     "react-native/no-unused-styles": 2,
@@ -17,6 +22,7 @@ module.exports = {
     "react-native/no-color-literals": 2,
     "react-native/no-raw-text": 2,
     "react-native/no-single-element-style-arrays": 2,
+    "no-unused-vars": 2,
     "react-hooks/exhaustive-deps": "off",
     "prettier/prettier": [
       "error",

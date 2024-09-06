@@ -1,15 +1,15 @@
-import React from 'react';
-import {Image, Pressable, Text, View} from 'react-native';
-import Logo from './images/logo.svg';
-import Mercoin from './images/mercoin.svg';
-import {styles} from './Header.styles';
-import {useGetApiProfileMe} from 'api/backend';
-import {useCredentials} from 'services/credentials';
+import React from "react";
+import { Image, Pressable, Text, View } from "react-native";
+import Logo from "./images/logo.svg";
+import Mercoin from "./images/mercoin.svg";
+import { styles } from "./Header.styles";
+import { useGetApiProfileMe } from "api/backend";
+import { useCredentials } from "services/credentials";
 
 function Header() {
   const [_, setCredentials] = useCredentials();
 
-  const {data: user} = useGetApiProfileMe();
+  const { data: user } = useGetApiProfileMe();
 
   const signOut = () => {
     setCredentials(null);
@@ -35,7 +35,7 @@ function Header() {
           {user?.userPhoto?.thumbnail ? (
             <Image
               style={styles.avatar}
-              source={{uri: user.userPhoto.thumbnail}}
+              source={{ uri: user.userPhoto.thumbnail }}
             />
           ) : (
             <View style={styles.avatar} />

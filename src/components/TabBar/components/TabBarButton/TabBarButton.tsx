@@ -13,7 +13,7 @@ export const TabBarButton = (props: TabBarButtonProps) => {
       accessibilityLabel={options.tabBarAccessibilityLabel}
       style={{
         ...styles.tabButton,
-        backgroundColor: isFocused ? Colors.accent10 : "transparent",
+        backgroundColor: isFocused ? Colors.accent10 : Colors.transparent,
       }}>
       {icon}
       <Text
