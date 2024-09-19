@@ -36,13 +36,9 @@ export const screensCommonStyles = StyleSheet.create({
   inputContainer: {
     width: "100%",
     gap: 40,
-    marginTop: 32,
+    marginVertical: 32,
   },
   button: {
     marginTop: "auto",
-    gap: 8,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
   },
 });

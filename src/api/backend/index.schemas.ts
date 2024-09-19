@@ -5,19 +5,11 @@
  * MercuryHub ASP.NET Core Web API
  * OpenAPI spec version: v1
  */
-export type GetApiVacanciesHotParams = {
-  Only?: ScopeRegionEnum;
-};
 
-export type GetApiVacanciesParams = {
-  Only?: ScopeRegionEnum;
-};
-
-export type GetApiTransactionsParams = {
-  Email?: string;
-  Page?: number;
-  PageSize?: number;
-};
+export interface TeamResponse {
+  id?: number;
+  name?: string | null;
+}
 
 export type GetApiTransactionsMyParams = {
   StartDate?: string;
@@ -29,65 +21,9 @@ export type GetApiTransactionsMyParams = {
   PageSize?: number;
 };
 
-export type GetApiProfileParams = {
-  Email?: string;
-};
-
-export type GetApiProfileEmailAvatarUrlParams = {
-  Size?: ImageSize;
-};
-
-export type GetApiProfileEmailAvatarParams = {
-  Size?: ImageSize;
-};
-
-export type GetApiProfileIdAvatarUrlParams = {
-  Size?: ImageSize;
-};
-
-export type GetApiProfileIdAvatarParams = {
-  Size?: ImageSize;
-};
-
-export type GetApiProfileListParams = {
-  Page?: number;
-  PageSize?: number;
-};
-
 export type GetApiProfileSearchParams = {
   Find?: string;
   Count?: number;
-};
-
-export type GetApiPermissionsUserteamsParams = {
-  Page?: number;
-  Count?: number;
-  Search?: string;
-};
-
-export type GetApiProfileAssignmentParams = {
-  EmployeeId?: string;
-  ClientTicker?: string;
-  FromDate?: string;
-  ToDate?: string;
-  Status?: string;
-  OrderByDateAscending?: boolean;
-  Page?: number;
-  PageSize?: number;
-};
-
-export type GetApiEmployeeListParams = {
-  Page?: number;
-  PageSize?: number;
-};
-
-export type GetApiClientsParams = {
-  Page?: number;
-  PageSize?: number;
-};
-
-export type GetApiAccountVerificationKeyParams = {
-  Output?: PublicKeyOutput;
 };
 
 export type PostApiAccountSsoGoogleParams = {
@@ -97,95 +33,18 @@ export type PostApiAccountSsoGoogleParams = {
   services?: string;
 };
 
-export interface VacancyResponse {
-  /** @nullable */
-  applyAlternateUrl?: string | null;
-  /** @nullable */
-  description?: string | null;
-  /** @nullable */
-  englishLevel?: string | null;
-  /** @nullable */
-  experience?: string | null;
-  /** @nullable */
-  id?: string | null;
-  /** @nullable */
-  professionalRole?: string | null;
-  /** @nullable */
-  salary?: string | null;
-  /** @nullable */
-  title?: string | null;
-}
-
-export interface VacancyItemResponse {
-  /** @nullable */
-  englishLevel?: string | null;
-  /** @nullable */
-  experience?: string | null;
-  /** @nullable */
-  id?: string | null;
-  /** @nullable */
-  professionalRole?: string | null;
-  /** @nullable */
-  salary?: string | null;
-  /** @nullable */
-  title?: string | null;
-}
-
 export interface UserPhotoResponse {
-  /** @nullable */
   middle?: string | null;
-  /** @nullable */
   origin?: string | null;
-  /** @nullable */
   thumbnail?: string | null;
-}
-
-export interface UserPermissionsResponse {
-  /** @nullable */
-  email?: string | null;
-  /** @nullable */
-  firstName?: string | null;
-  id?: string;
-  /** @nullable */
-  jobTitle?: string | null;
-  /** @nullable */
-  lastName?: string | null;
-  /** @nullable */
-  picture?: string | null;
-  /** @nullable */
-  services?: ServicePermissionsResponse[] | null;
-  /** @nullable */
-  teams?: TeamResponse[] | null;
 }
 
 export interface UserBalanceUpdatedResponse {
   balance?: number;
 }
 
-export interface UserAssignmentResponse {
-  /** @nullable */
-  clientTicker?: string | null;
-  date?: string;
-  /** @nullable */
-  employeeId?: string | null;
-  /** @nullable */
-  project?: string | null;
-  /** @nullable */
-  status?: string | null;
-  /** @nullable */
-  time?: number | null;
-  userId?: string;
-}
-
-export interface UserAssignmentResponsePaginationResponse {
-  /** @nullable */
-  data?: UserAssignmentResponse[] | null;
-  paginationContext?: PaginationContext;
-}
-
 export interface TransferCoinsCommand {
   amount?: number;
-  /** @nullable */
   to?: string | null;
 }
 
@@ -200,48 +59,18 @@ export const TransactionType = {
 
 export interface TransactionResponse {
   amount?: number;
-  /** @nullable */
   comment?: string | null;
-  /** @nullable */
   creditUserName?: string | null;
   date?: string;
-  /** @nullable */
   debitUserName?: string | null;
   id?: number;
-  /** @nullable */
   title?: string | null;
-  /** @nullable */
-  transactionType?: string | null;
+  transactionType?: TransactionType | null;
 }
 
 export interface TransactionResponsePaginationResponse {
-  /** @nullable */
   data?: TransactionResponse[] | null;
   paginationContext?: PaginationContext;
-}
-
-export interface TeamServicesResponse {
-  /** @nullable */
-  serviceAvailabilities?: ServiceAvailabilityDto[] | null;
-  teamId?: number;
-  /** @nullable */
-  teamName?: string | null;
-  userCount?: number;
-}
-
-export interface TeamResponse {
-  id?: number;
-  /** @nullable */
-  name?: string | null;
-}
-
-export interface TeamPermissionsResponse {
-  id?: number;
-  /** @nullable */
-  name?: string | null;
-  /** @nullable */
-  services?: ServicePermissionsResponse[] | null;
-  userCount?: number;
 }
 
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder];
@@ -257,53 +86,6 @@ export const SortBy = {
   Date: "Date",
 } as const;
 
-export interface SetUserPermissionsCommand {
-  /** @nullable */
-  checked?: number[] | null;
-  /** @nullable */
-  unchecked?: number[] | null;
-}
-
-export interface SetTeamPermissionsCommand {
-  /** @nullable */
-  checked?: number[] | null;
-  /** @nullable */
-  unchecked?: number[] | null;
-}
-
-export interface ServiceResponse {
-  /** @nullable */
-  access?: boolean | null;
-  id?: number;
-  /** @nullable */
-  name?: string | null;
-  /** @nullable */
-  shortName?: string | null;
-}
-
-export interface ServicePermissionsResponse {
-  /** @nullable */
-  access?: boolean | null;
-  id?: number;
-  /** @nullable */
-  name?: string | null;
-  /** @nullable */
-  permissions?: PermissionCheckResponse[] | null;
-  /** @nullable */
-  shortName?: string | null;
-}
-
-export interface ServiceAvailabilityDto {
-  /** @nullable */
-  access?: boolean | null;
-  id?: number;
-  isAvailable?: boolean;
-  /** @nullable */
-  name?: string | null;
-  /** @nullable */
-  shortName?: string | null;
-}
-
 export type ScopeRegionEnum =
   (typeof ScopeRegionEnum)[keyof typeof ScopeRegionEnum];
 
@@ -312,13 +94,7 @@ export const ScopeRegionEnum = {
   Int: "Int",
 } as const;
 
-export interface RegisterClientCommand {
-  /** @nullable */
-  name?: string | null;
-}
-
 export interface RefreshTokenCommand {
-  /** @nullable */
   token?: string | null;
 }
 
@@ -327,7 +103,6 @@ export interface RedeemCoinsResponse {
 }
 
 export interface RedeemCoinsCommand {
-  /** @nullable */
   promoCode?: string | null;
 }
 
@@ -339,104 +114,14 @@ export const PublicKeyOutput = {
   JWK: "JWK",
 } as const;
 
-export interface ProjectResponse {
-  id?: number;
-  /** @nullable */
-  name?: string | null;
-}
-
 export interface ProfileSearchResponse {
-  /** @nullable */
   email?: string | null;
-  /** @nullable */
   firstName?: string | null;
   id?: string;
-  /** @nullable */
   jobTitle?: string | null;
-  /** @nullable */
   lastName?: string | null;
-  /** @nullable */
   picture?: string | null;
-  /** @nullable */
   teams?: TeamResponse[] | null;
-}
-
-export interface ProfileSearchResponsePaginationResponse {
-  /** @nullable */
-  data?: ProfileSearchResponse[] | null;
-  paginationContext?: PaginationContext;
-}
-
-export interface ProfileResponse {
-  /** @nullable */
-  email?: string | null;
-  /** @nullable */
-  firstName?: string | null;
-  id?: string;
-  /** @nullable */
-  jobTitle?: string | null;
-  /** @nullable */
-  lastName?: string | null;
-  /** @nullable */
-  teams?: TeamResponse[] | null;
-  userPhoto?: UserPhotoResponse;
-}
-
-export interface ProfileAvatarResponse {
-  /** @nullable */
-  avatarUrl?: string | null;
-}
-
-export interface PickUpPromoCodeResponse {
-  /** @nullable */
-  promoCode?: string | null;
-  /** @nullable */
-  promoCodeId?: string | null;
-  promoCodeValue?: number;
-  /** @nullable */
-  userEmail?: string | null;
-}
-
-export interface PickUpPromoCodeCommand {
-  /** @nullable */
-  promoCode?: string | null;
-}
-
-export interface PermissionResponse {
-  id?: number;
-  /** @nullable */
-  name?: string | null;
-  /** @nullable */
-  shortDescription?: string | null;
-}
-
-export interface PermissionCheckResponse {
-  checked?: boolean;
-  id?: number;
-  /** @nullable */
-  name?: string | null;
-  /** @nullable */
-  shortDescription?: string | null;
-}
-
-export interface PatchUserPermissionsCommand {
-  /** @nullable */
-  permissionIds?: number[] | null;
-}
-
-export interface PatchTeamPermissionsCommand {
-  /** @nullable */
-  permissionIds?: number[] | null;
-}
-
-export interface PatchAccessUserPermissionsCommand {
-  /** @nullable */
-  servicesIds?: number[] | null;
-}
-
-export interface PatchAccessTeamPermissionsCommand {
-  /** @nullable */
-  servicesIds?: number[] | null;
 }
 
 export interface PaginationContext {
@@ -446,64 +131,40 @@ export interface PaginationContext {
   totalRowCount?: number;
 }
 
-/**
- * @nullable
- */
 export type MyProfileResponseServices = {
   [key: string]: string[] | null;
 } | null;
 
 export interface MyProfileResponse {
   balance?: number;
-  /** @nullable */
   email?: string | null;
-  /** @nullable */
   firstName?: string | null;
   id?: string;
-  /** @nullable */
   jobTitle?: string | null;
-  /** @nullable */
   lastName?: string | null;
-  /** @nullable */
   location?: string | null;
-  /** @nullable */
   phone?: string | null;
-  /** @nullable */
   services?: MyProfileResponseServices;
-  /** @nullable */
   teams?: TeamResponse[] | null;
   userPhoto?: UserPhotoResponse;
 }
 
 export interface LoginSsoGoogleCommand {
-  /** @nullable */
   idToken?: string | null;
 }
 
-export interface LoginClientCommand {
-  clientId?: string;
-  /** @nullable */
-  secret?: string | null;
-}
-
 export interface JwtWithRefreshResponse {
-  /** @nullable */
   accessToken?: string | null;
   accessTokenExpiresIn?: number;
-  /** @nullable */
   accessTokenType?: string | null;
   issuedAt?: string;
-  /** @nullable */
   refreshToken?: string | null;
-  /** @nullable */
   refreshTokenExpiresIn?: number | null;
 }
 
 export interface JwtResponse {
-  /** @nullable */
   accessToken?: string | null;
   accessTokenExpiresIn?: number;
-  /** @nullable */
   accessTokenType?: string | null;
   issuedAt?: string;
 }
@@ -516,104 +177,14 @@ export const ImageSize = {
   Original: "Original",
 } as const;
 
-export interface GetUsersMostRecentAssignmentsCommand {
-  byDate: string;
-  employeeIds: string[];
-}
-
 export interface ErrorDetail {
-  /** @nullable */
   message?: string | null;
-  /** @nullable */
   source?: string | null;
 }
 
 export interface ErrorResponse {
-  /** @nullable */
   code?: string | null;
-  /** @nullable */
   details?: ErrorDetail[] | null;
-  /** @nullable */
   message?: string | null;
   readonly success?: boolean;
-}
-
-export interface EmployeeInfoWithBalanceResponse {
-  coins?: number;
-  /** @nullable */
-  email?: string | null;
-  /** @nullable */
-  firstName?: string | null;
-  id?: string;
-  /** @nullable */
-  jobTitle?: string | null;
-  /** @nullable */
-  lastName?: string | null;
-  /** @nullable */
-  picture?: string | null;
-  /** @nullable */
-  teams?: TeamResponse[] | null;
-}
-
-export interface EmployeeInfoWithBalanceResponsePaginationResponse {
-  /** @nullable */
-  data?: EmployeeInfoWithBalanceResponse[] | null;
-  paginationContext?: PaginationContext;
-}
-
-export interface EditClientCommand {
-  /** @nullable */
-  name?: string | null;
-}
-
-export interface DeleteServicesCommand {
-  /** @nullable */
-  serviceIds?: number[] | null;
-}
-
-export interface DebitCoinsToUserCommand {
-  amount?: number;
-  /** @nullable */
-  comment?: string | null;
-  /** @nullable */
-  userEmail?: string | null;
-}
-
-export interface CreditCoinsToUserCommand {
-  amount?: number;
-  /** @nullable */
-  comment?: string | null;
-  /** @nullable */
-  userEmail?: string | null;
-}
-
-export interface CreateServiceCommand {
-  /** @nullable */
-  name?: string | null;
-  /** @nullable */
-  shortName?: string | null;
-}
-
-export interface CreatePermissionCommand {
-  /** @nullable */
-  codeName?: string | null;
-  /** @nullable */
-  name?: string | null;
-  serviceId?: number;
-  /** @nullable */
-  shortDescription?: string | null;
-}
-
-export interface ClientResponse {
-  clientId?: string;
-  /** @nullable */
-  name?: string | null;
-  /** @nullable */
-  secret?: string | null;
-}
-
-export interface ClientResponsePaginationResponse {
-  /** @nullable */
-  data?: ClientResponse[] | null;
-  paginationContext?: PaginationContext;
 }

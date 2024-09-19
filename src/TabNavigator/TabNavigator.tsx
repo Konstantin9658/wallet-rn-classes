@@ -25,7 +25,9 @@ export default function TabNavigator() {
   return (
     <>
       <Header />
-      <Tab.Navigator tabBar={TabBar} screenOptions={TAB_NAVIGATOR_OPTIONS}>
+      <Tab.Navigator
+        tabBar={props => <TabBar {...props} />}
+        screenOptions={TAB_NAVIGATOR_OPTIONS}>
         <Tab.Screen
           name="Send mercoins"
           component={HomeScreen}

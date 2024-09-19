@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
     fontWeight: "400",
   },
   text_error: {
-    color: Colors.red,
+    color: Colors.error,
   },
   text_hint: {
     color: Colors.dark80,

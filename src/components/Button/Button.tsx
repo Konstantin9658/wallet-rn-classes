@@ -11,7 +11,14 @@ import { CustomButtonProps } from "./Button.types";
 import { Colors } from "constants/Colors";
 
 export const Button = (props: CustomButtonProps) => {
-  const { isDisabled, isLoading, style, label, IconComponent, ...rest } = props;
+  const {
+    isDisabled = false,
+    isLoading = false,
+    style,
+    label,
+    IconComponent,
+    ...rest
+  } = props;
 
   return (
     <Pressable

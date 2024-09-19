@@ -11,6 +11,8 @@ export const styles = StyleSheet.create({
   },
   placeholder: { marginBottom: 32 },
   title: {
+    fontFamily: "Inter",
+    fontWeight: "600",
     fontSize: FontSize.fs20,
     lineHeight: LineHeight.lh30,
     marginBottom: 8,
@@ -18,6 +20,8 @@ export const styles = StyleSheet.create({
   },
   description: {
     fontSize: FontSize.fs16,
+    fontFamily: "Inter",
+    fontWeight: "400",
     textAlign: "center",
     lineHeight: LineHeight.lh24,
     color: Colors.dark80,
