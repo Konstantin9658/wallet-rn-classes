@@ -18,6 +18,6 @@ export const styles = StyleSheet.create({
     borderColor: Colors.primary100,
   },
   input_error: {
-    borderColor: Colors.red,
+    borderColor: Colors.error,
   },
 });

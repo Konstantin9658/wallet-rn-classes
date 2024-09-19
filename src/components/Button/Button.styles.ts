@@ -16,6 +16,10 @@ export const styles = StyleSheet.create({
       width: 0,
       height: 8,
     },
+    gap: 8,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
   },
   button_pressed: {
     opacity: 0.7,

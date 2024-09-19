@@ -20,7 +20,15 @@ const compat = new FlatCompat({
 
 export default [
   {
-    ignores: ["**/babel.config.js", "**/.eslintrc.js", "**/.prettierrc.js"],
+    ignores: [
+      "**/babel.config.js",
+      "**/.eslintrc.js",
+      "**/.prettierrc.js",
+      "**/jest.config.js",
+      "**/metro.config.js",
+      "**/orval.config.js",
+      "**/react-native.config.js",
+    ],
   },
   ...compat.extends(
     "eslint:recommended",

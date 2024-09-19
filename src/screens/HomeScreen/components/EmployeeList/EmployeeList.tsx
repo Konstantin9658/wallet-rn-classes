@@ -1,4 +1,4 @@
-import { ActivityIndicator, Pressable, View } from "react-native";
+import { ActivityIndicator, Keyboard, Pressable, View } from "react-native";
 import { styles } from "./EmployeeList.styles";
 import { EmployeeListProps } from "./EmployeeList.types";
 import React, { forwardRef, useImperativeHandle, useRef } from "react";
@@ -40,6 +40,7 @@ export const EmployeeList = forwardRef<BottomSheet, EmployeeListProps>(
 
     const handlePressAction = (item: ProfileSearchResponse) => () => {
       internalRef.current?.close();
+      Keyboard.dismiss();
 
       onChange(`${item.firstName} ${item.lastName}`);
       onValueChange("email", item.email!);
@@ -91,6 +92,8 @@ export const EmployeeList = forwardRef<BottomSheet, EmployeeListProps>(
         ) : (
           <BottomSheetFlatList
             data={employees}
+            keyboardShouldPersistTaps="always"
+            keyboardDismissMode="on-drag"
             ListEmptyComponent={EmptyPlaceholder}
             contentContainerStyle={styles.contentContainer}
             ItemSeparatorComponent={Separator}

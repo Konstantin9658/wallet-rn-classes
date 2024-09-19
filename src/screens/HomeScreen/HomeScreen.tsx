@@ -93,7 +93,10 @@ export const HomeScreen = () => {
       }
 
       try {
-        await postApiCoinsTransfer({ to: data.email, amount: data.amount });
+        await postApiCoinsTransfer({
+          to: data.email,
+          amount: data.amount,
+        });
       } catch (error) {
         console.log(error);
       } finally {
@@ -110,8 +113,8 @@ export const HomeScreen = () => {
         contentContainerStyle={commonStyles.flex}
         style={commonStyles.flex}
         keyboardVerticalOffset={80}
-        behavior={Platform.OS === "ios" ? "position" : "height"}>
-        <ScrollView>
+        behavior={Platform.OS === "ios" ? "padding" : "height"}>
+        <ScrollView style={commonStyles.flex}>
           <View style={screensCommonStyles.container}>
             <Image
               style={screensCommonStyles.image}

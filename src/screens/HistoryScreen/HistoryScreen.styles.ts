@@ -3,26 +3,20 @@ import { FontSize, LineHeight } from "constants/Typography";
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
-  scrollContainer: {
-    flex: 1,
-  },
   container: {
-    alignItems: "center",
-    justifyContent: "center",
-    minHeight: "100%",
-    paddingHorizontal: 40,
+    paddingHorizontal: 24,
+    paddingVertical: 32,
   },
-  placeholder: { marginBottom: 32 },
+  separator: { marginBottom: 16 },
   title: {
-    fontSize: FontSize.fs20,
-    lineHeight: LineHeight.lh30,
-    marginBottom: 8,
+    fontSize: FontSize.fs24,
+    lineHeight: LineHeight.lh36,
+    fontFamily: "Inter",
+    fontWeight: "600",
+    marginBottom: 24,
     color: Colors.dark80,
   },
-  description: {
-    fontSize: FontSize.fs16,
-    textAlign: "center",
-    lineHeight: LineHeight.lh24,
-    color: Colors.dark80,
+  footer: {
+    marginTop: 24,
   },
 });
