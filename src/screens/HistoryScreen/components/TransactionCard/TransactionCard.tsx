@@ -3,18 +3,7 @@ import { TransactionResponse } from "api/backend/index.schemas";
 import { Text, View } from "react-native";
 import { styles } from "./TransactionCard.styles";
 import { memo } from "react";
-
-export const getDate = (date?: string) => {
-  if (!date) return;
-  const newDate = new Date(date);
-  const day = String(newDate.getDate()).padStart(2, "0");
-  const month = String(newDate.getMonth() + 1).padStart(2, "0");
-  const year = newDate.getFullYear();
-  const hours = newDate.getHours();
-  const minutes = String(newDate.getMinutes()).padStart(2, "0");
-
-  return `${day}.${month}.${year} ${hours}:${minutes}`;
-};
+import { getDate } from "screens/HistoryScreen/utils";
 
 export const TransactionCard = memo(
   ({ item }: { item: TransactionResponse }) => {

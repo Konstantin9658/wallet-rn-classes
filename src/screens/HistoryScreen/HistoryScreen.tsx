@@ -1,7 +1,6 @@
 import {
   ActivityIndicator,
   FlatList,
-  ListRenderItem,
   RefreshControl,
   Text,
   View,
@@ -9,28 +8,14 @@ import {
 import { styles } from "./HistoryScreen.styles";
 import { EmptyState } from "./components/EmptyState/EmptyState";
 import { getApiTransactionsMy } from "api/backend";
-import { Button } from "components/Button/Button";
 import { useCallback, useMemo, useState } from "react";
 import { QueryFunctionContext, useInfiniteQuery } from "@tanstack/react-query";
 import {
   TransactionResponse,
   TransactionResponsePaginationResponse,
 } from "api/backend/index.schemas";
-import { TransactionCard } from "./components/TransactionCard/TransactionCard";
-
-const queryKey = ["/transactions/my"];
-
-export const getDate = (date?: string) => {
-  if (!date) return;
-  const newDate = new Date(date);
-  const day = String(newDate.getDate()).padStart(2, "0");
-  const month = String(newDate.getMonth() + 1).padStart(2, "0");
-  const year = newDate.getFullYear();
-  const hours = newDate.getHours();
-  const minutes = String(newDate.getMinutes()).padStart(2, "0");
-
-  return `${day}.${month}.${year} ${hours}:${minutes}`;
-};
+import { getKey, renderItem } from "./utils";
+import { QUERY_KEY } from "./consts";
 
 export const HistoryScreen = () => {
   const [page, setPage] = useState<number>(1);
@@ -53,7 +38,7 @@ export const HistoryScreen = () => {
 
   const { data, isFetching, isLoading, fetchNextPage, hasNextPage } =
     useInfiniteQuery<TransactionResponsePaginationResponse>({
-      queryKey,
+      queryKey: QUERY_KEY,
       queryFn: fetchMyTransactions,
       initialPageParam: page,
       getNextPageParam: (lastPage, _, lastPageParam) => {
@@ -70,9 +55,6 @@ export const HistoryScreen = () => {
     setPage(page + 1);
   };
 
-  const getKey = (item: TransactionResponse) =>
-    item?.id ? item.id.toString() : `transaction-${Math.random()}`;
-
   const transactions = useMemo(() => {
     return data
       ? data.pages.flatMap(
@@ -82,11 +64,6 @@ export const HistoryScreen = () => {
         )
       : [];
   }, [data]);
-
-  const renderItem: ListRenderItem<TransactionResponse> = useCallback(
-    ({ item }) => <TransactionCard item={item} />,
-    [],
-  );
 
   if (isLoading) return <ActivityIndicator size="large" />;
 
@@ -102,19 +79,12 @@ export const HistoryScreen = () => {
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }
       removeClippedSubviews
+      onEndReached={() => handleIncreasePage()}
       ListEmptyComponent={EmptyState}
       ItemSeparatorComponent={() => <View style={styles.separator} />}
       ListHeaderComponent={<Text style={styles.title}>Transfer history</Text>}
       ListFooterComponent={
-        hasNextPage ? (
-          <Button
-            style={styles.footer}
-            isDisabled={isFetching}
-            isLoading={isFetching || isLoading}
-            onPress={handleIncreasePage}
-            label="Load more"
-          />
-        ) : null
+        isFetching && hasNextPage ? <ActivityIndicator size="large" /> : null
       }
       data={transactions}
       keyExtractor={getKey}
