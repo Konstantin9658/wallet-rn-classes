@@ -3,9 +3,9 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   container: {
+    height: 92,
     flexDirection: "row",
     justifyContent: "center",
-    gap: 12,
     paddingVertical: 8,
     backgroundColor: Colors.white100,
     shadowColor: Colors.black100,
@@ -16,5 +16,16 @@ export const styles = StyleSheet.create({
     },
     elevation: 5,
     shadowOpacity: 0.06,
+    paddingHorizontal: 14,
+  },
+  item: {
+    width: 76,
+    height: 76,
+    paddingHorizontal: 8,
+    paddingVertical: 10,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 12,
+    marginHorizontal: 6,
   },
 });

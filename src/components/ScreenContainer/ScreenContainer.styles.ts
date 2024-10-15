@@ -2,15 +2,13 @@ import { Colors } from "constants/Colors";
 import { FontSize, LineHeight } from "constants/Typography";
 import { StyleSheet } from "react-native";
 
-export const screensCommonStyles = StyleSheet.create({
+export const styles = StyleSheet.create({
   container: {
     paddingTop: 27,
     paddingBottom: 56,
     paddingHorizontal: 24,
     alignItems: "center",
     justifyContent: "center",
-    flex: 1,
-    minHeight: "100%",
   },
   image: {
     marginBottom: 24,
@@ -37,8 +35,5 @@ export const screensCommonStyles = StyleSheet.create({
     width: "100%",
     gap: 40,
     marginVertical: 32,
-  },
-  button: {
-    marginTop: "auto",
   },
 });

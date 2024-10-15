@@ -1,32 +1,31 @@
 import React from "react";
-import { Image, ScrollView, Text, View } from "react-native";
-import { screensCommonStyles } from "../common.styles";
+import { StyleSheet } from "react-native";
 import { Input } from "components/Input/Input";
 import { Button } from "components/Button/Button";
 import IconWalletIn from "./images/wallet-in.svg";
+import { ScreenContainer } from "components/ScreenContainer/ScreenContainer";
+
+const styles = StyleSheet.create({
+  button: {
+    marginTop: "auto",
+  },
+});
 
 export const PromocodeScreen = () => {
   return (
-    <ScrollView automaticallyAdjustKeyboardInsets>
-      <View style={screensCommonStyles.container}>
-        <Image
-          style={screensCommonStyles.image}
-          source={require("./images/i120_promo.png")}
-        />
-        <Text style={screensCommonStyles.title}>Have a Promo Code?</Text>
-        <Text style={screensCommonStyles.description}>
-          Enter a promo code and grab money.
-        </Text>
-        <View style={screensCommonStyles.inputContainer}>
-          <Input placeholder="6 characters" />
-        </View>
+    <ScreenContainer
+      title="Have a Promo Code?"
+      description="Enter a promo code and grab money."
+      imageSrc={require("./images/i120_promo.png")}
+      ButtonComponent={
         <Button
           label="Get mercoins"
           IconComponent={IconWalletIn}
           isDisabled
-          style={screensCommonStyles.button}
+          style={styles.button}
         />
-      </View>
-    </ScrollView>
+      }>
+      <Input placeholder="6 characters" />
+    </ScreenContainer>
   );
 };
