@@ -6,7 +6,7 @@ import { GoogleSignin } from "@react-native-google-signin/google-signin";
 import { useCredentials } from "services/credentials";
 import { LoginScreen } from "screens/LoginScreen/LoginScreen";
 import { NavigationContainer } from "@react-navigation/native";
-import TabNavigator from "TabNavigator/TabNavigator";
+import TabNavigator from "navigators/TabNavigator/TabNavigator";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { commonStyles } from "common/styles";
 

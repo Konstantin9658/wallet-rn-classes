@@ -1,18 +1,7 @@
 import React, { useCallback, useRef, useState } from "react";
-import {
-  Image,
-  KeyboardAvoidingView,
-  Platform,
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from "react-native";
+import { Pressable, StyleSheet, TextInput } from "react-native";
 import { Input } from "components/Input/Input";
 import { Button } from "components/Button/Button";
-import { screensCommonStyles } from "screens/common.styles";
 import { FormDataTransfer } from "./HomeScreen.types";
 import { Controller, ControllerRenderProps, useForm } from "react-hook-form";
 import {
@@ -22,17 +11,21 @@ import {
 } from "api/backend";
 import { EmployeeList } from "./components/EmployeeList/EmployeeList";
 import BottomSheet from "@gorhom/bottom-sheet";
-import { commonStyles } from "common/styles";
+import { ScreenContainer } from "components/ScreenContainer/ScreenContainer";
 
 const styles = StyleSheet.create({
   input: {
     pointerEvents: "none",
+  },
+  button: {
+    marginTop: "auto",
   },
 });
 
 export const HomeScreen = () => {
   const [searchString, setSearchString] = useState<string>("");
   const [isFocused, setFocused] = useState<boolean>(false);
+
   const { data: user } = useGetApiProfileMe();
   const { data, isRefetching, isLoading } = useGetApiProfileSearch(
     { Find: searchString, Count: 10 },
@@ -108,71 +101,60 @@ export const HomeScreen = () => {
   );
 
   return (
-    <View style={commonStyles.flex}>
-      <KeyboardAvoidingView
-        contentContainerStyle={commonStyles.flex}
-        style={commonStyles.flex}
-        keyboardVerticalOffset={80}
-        behavior={Platform.OS === "ios" ? "padding" : "height"}>
-        <ScrollView style={commonStyles.flex}>
-          <View style={screensCommonStyles.container}>
-            <Image
-              style={screensCommonStyles.image}
-              source={require("./images/i120_mercoin.png")}
-            />
-            <Text style={screensCommonStyles.title}>Send Mercoins</Text>
-            <Text style={screensCommonStyles.description}>
-              Select a user and specify the number of&nbsp;mercoins to transfer
-            </Text>
-            <View style={screensCommonStyles.inputContainer}>
-              <Pressable
-                onPress={() => {
-                  setFocused(true);
-                  refRBSheet.current?.expand();
-                }}>
-                <Input
-                  ref={inputRef}
-                  style={styles.input}
-                  placeholder="Enter user name or E-mail"
-                  value={searchString}
-                />
-              </Pressable>
-              <Controller
-                name="amount"
-                control={control}
-                render={({ field }) => (
-                  <Input
-                    placeholder="Amount of mercoins"
-                    value={field.value === 0 ? "" : String(field.value)}
-                    inputMode="numeric"
-                    hasError={!!errors.amount}
-                    errorMessage={errors.amount?.message}
-                    keyboardType="numeric"
-                    onChangeText={handleMercoinsAmountChange(field)}
-                  />
-                )}
-              />
-            </View>
-            <Button
-              isLoading={isSubmitting}
-              label="Send mercoins"
-              isDisabled={!enableToSend}
-              style={screensCommonStyles.button}
-              onPress={handleSubmit(onSubmit)}
-            />
-          </View>
-        </ScrollView>
-      </KeyboardAvoidingView>
-      {isFocused ? (
-        <EmployeeList
-          inputValue={searchString}
-          onValueChange={setValue}
-          onChange={setSearchString}
-          ref={refRBSheet}
-          isRefetching={isRefetching || isLoading}
-          employees={data}
+    <ScreenContainer
+      title="Send Mercoins"
+      description="Select a user and specify the number of&nbsp;mercoins to transfer"
+      imageSrc={require("./images/i120_mercoin.png")}
+      ButtonComponent={
+        <Button
+          isLoading={isSubmitting}
+          label="Send mercoins"
+          isDisabled={!enableToSend}
+          style={styles.button}
+          onPress={handleSubmit(onSubmit)}
         />
-      ) : null}
-    </View>
+      }
+      BottomSheetComponent={
+        isFocused ? (
+          <EmployeeList
+            inputValue={searchString}
+            onValueChange={setValue}
+            onChange={setSearchString}
+            ref={refRBSheet}
+            isRefetching={isRefetching || isLoading}
+            employees={data}
+          />
+        ) : null
+      }>
+      <>
+        <Pressable
+          onPress={() => {
+            setFocused(true);
+            refRBSheet.current?.expand();
+          }}>
+          <Input
+            ref={inputRef}
+            style={styles.input}
+            placeholder="Enter user name or E-mail"
+            value={searchString}
+          />
+        </Pressable>
+        <Controller
+          name="amount"
+          control={control}
+          render={({ field }) => (
+            <Input
+              placeholder="Amount of mercoins"
+              value={field.value === 0 ? "" : String(field.value)}
+              inputMode="numeric"
+              hasError={!!errors.amount}
+              errorMessage={errors.amount?.message}
+              keyboardType="numeric"
+              onChangeText={handleMercoinsAmountChange(field)}
+            />
+          )}
+        />
+      </>
+    </ScreenContainer>
   );
 };
