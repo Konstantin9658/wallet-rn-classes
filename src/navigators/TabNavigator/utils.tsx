@@ -16,10 +16,13 @@ const $tabBarLabelStyleActive: TextStyle = {
 export const renderTabBarLabel = (props: {
   focused: boolean;
   children: ReactNode;
-}) => (
-  <Text
-    numberOfLines={2}
-    style={[$tabBarLabelStyle, props.focused ? $tabBarLabelStyleActive : null]}>
-    {props.children}
-  </Text>
-);
+}) => {
+  const { children, focused } = props;
+  return (
+    <Text
+      numberOfLines={2}
+      style={[$tabBarLabelStyle, focused ? $tabBarLabelStyleActive : null]}>
+      {children}
+    </Text>
+  );
+};

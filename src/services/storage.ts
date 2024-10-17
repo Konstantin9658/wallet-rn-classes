@@ -5,7 +5,7 @@ import { Schema } from "yup";
 const storage = new MMKV();
 
 // List of available keys for persistent storage
-type StorageKey = "credentials";
+type StorageKey = "credentials" | "theme";
 
 const storageKeyRegister = new Map<StorageKey, true>();
 

@@ -14,8 +14,8 @@ const styles = StyleSheet.create({
 export const RequestMercoinsScreen = () => {
   return (
     <ScreenContainer
-      title="Have a Promo Code?"
-      description="Enter a promo code and grab money."
+      title="Request Mercoins"
+      description="Generate QR-code and grab money."
       imageSrc={require("./images/i120_qr.png")}
       ButtonComponent={
         <Button

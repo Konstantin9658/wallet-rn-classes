@@ -29,7 +29,7 @@ export const HomeScreen = () => {
   const { data: user } = useGetApiProfileMe();
   const { data, isRefetching, isLoading } = useGetApiProfileSearch(
     { Find: searchString, Count: 10 },
-    { query: { enabled: searchString.length > 2 } },
+    { query: { enabled: searchString.length > 1 } },
   );
 
   const {
@@ -126,35 +126,33 @@ export const HomeScreen = () => {
           />
         ) : null
       }>
-      <>
-        <Pressable
-          onPress={() => {
-            setFocused(true);
-            refRBSheet.current?.expand();
-          }}>
-          <Input
-            ref={inputRef}
-            style={styles.input}
-            placeholder="Enter user name or E-mail"
-            value={searchString}
-          />
-        </Pressable>
-        <Controller
-          name="amount"
-          control={control}
-          render={({ field }) => (
-            <Input
-              placeholder="Amount of mercoins"
-              value={field.value === 0 ? "" : String(field.value)}
-              inputMode="numeric"
-              hasError={!!errors.amount}
-              errorMessage={errors.amount?.message}
-              keyboardType="numeric"
-              onChangeText={handleMercoinsAmountChange(field)}
-            />
-          )}
+      <Pressable
+        onPress={() => {
+          setFocused(true);
+          refRBSheet.current?.expand();
+        }}>
+        <Input
+          ref={inputRef}
+          style={styles.input}
+          placeholder="Enter user name or E-mail"
+          value={searchString}
         />
-      </>
+      </Pressable>
+      <Controller
+        name="amount"
+        control={control}
+        render={({ field }) => (
+          <Input
+            placeholder="Amount of mercoins"
+            value={field.value === 0 ? "" : String(field.value)}
+            inputMode="numeric"
+            hasError={!!errors.amount}
+            errorMessage={errors.amount?.message}
+            keyboardType="numeric"
+            onChangeText={handleMercoinsAmountChange(field)}
+          />
+        )}
+      />
     </ScreenContainer>
   );
 };

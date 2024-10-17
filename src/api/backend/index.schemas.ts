@@ -162,6 +162,12 @@ export interface JwtWithRefreshResponse {
   refreshTokenExpiresIn?: number | null;
 }
 
+export type ThemeVariant = "Light" | "Dark" | "Auto";
+
+export interface ThemeResponse {
+  theme: ThemeVariant;
+}
+
 export interface JwtResponse {
   accessToken?: string | null;
   accessTokenExpiresIn?: number;

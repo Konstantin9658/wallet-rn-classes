@@ -6,9 +6,10 @@ import { GoogleSignin } from "@react-native-google-signin/google-signin";
 import { useCredentials } from "services/credentials";
 import { LoginScreen } from "screens/LoginScreen/LoginScreen";
 import { NavigationContainer } from "@react-navigation/native";
-import TabNavigator from "navigators/TabNavigator/TabNavigator";
+// import TabNavigator from "navigators/TabNavigator/TabNavigator";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { commonStyles } from "common/styles";
+import StackNavigator from "navigators/StackNavigator/StackNavigator";
 
 if (__DEV__) {
   require("./ReactotronConfig");
@@ -32,7 +33,7 @@ function App(): React.JSX.Element {
         <QueryClientProvider client={queryClient}>
           <SafeAreaView style={commonStyles.flex}>
             <StatusBar barStyle="dark-content" />
-            {credentials ? <TabNavigator /> : <LoginScreen />}
+            {credentials ? <StackNavigator /> : <LoginScreen />}
           </SafeAreaView>
         </QueryClientProvider>
       </NavigationContainer>
