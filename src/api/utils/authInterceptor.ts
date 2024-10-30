@@ -4,12 +4,12 @@ import { credentials } from "services/credentials";
 
 export const applyAuthInterceptors = (axiosInstance: AxiosInstance) => {
   const requestOnFulfilled = async (config: InternalAxiosRequestConfig) => {
-    // Wait until token refreshing is finished (if needed)
+    // Ожидание окончания обновления токена, если оно выполняется
     if (tokenRefresher.getIsRefreshing()) {
       await tokenRefresher.getRefreshPromise();
     }
 
-    // Add the auth token to request headers if it exists
+    // Добавление токена в заголовок запроса, если он есть
     const accessToken = credentials.get()?.accessToken;
     if (accessToken) {
       config.headers.set("Authorization", `Bearer ${accessToken}`);
@@ -19,35 +19,34 @@ export const applyAuthInterceptors = (axiosInstance: AxiosInstance) => {
   };
 
   const responseOnRejected = async (error: unknown) => {
-    // Check if the error is 401 Unauthorized
+    // Обработка ошибки 401 Unauthorized
     if (axios.isAxiosError(error) && error.response?.status === 401) {
-      credentials.delete();
-      return Promise.reject(error);
+      const refreshToken = credentials.get()?.refreshToken;
+      if (!refreshToken) {
+        credentials.delete();
+        return Promise.reject(error);
+      }
+
+      // Попытка обновления токена
+      const authResponse = await tokenRefresher.refresh(refreshToken);
+
+      // Если обновление не удалось, очистить данные и отклонить запрос
+      if (!authResponse) {
+        credentials.delete();
+        return Promise.reject(error);
+      }
+
+      // Сохранение новых данных
+      credentials.set(authResponse);
+
+      // Повторный запрос, если конфигурация error.config существует
+      if (error.config) {
+        return axiosInstance(error.config);
+      }
     }
 
-    // // Check if the refresh token exists
-    // const token = credentials.get()?.refreshToken;
-    // if (!token) {
-    //   return Promise.reject(error);
-    // }
-
-    // // Check if the token has been refreshed successfully
-    // const authResponse = await tokenRefresher.refresh(token);
-    // if (!authResponse) {
-    //   credentials.delete();
-    //   return Promise.reject(error);
-    // }
-
-    // // Save new credentials
-    // credentials.set(authResponse);
-
-    // // Check if information about the initial request exists
-    // if (!error.config) {
-    //   return Promise.reject(error);
-    // }
-
-    // // Repeat initial request
-    // return axiosInstance(error.config);
+    // Отклонение с исходной ошибкой, если это не 401
+    return Promise.reject(error);
   };
 
   axiosInstance.interceptors.request.use(requestOnFulfilled);

@@ -10,7 +10,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { commonStyles } from "common/styles";
 import StackNavigator from "navigators/StackNavigator/StackNavigator";
-
+import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 if (__DEV__) {
   require("./ReactotronConfig");
 }
@@ -28,16 +29,20 @@ function App(): React.JSX.Element {
   const [credentials] = useCredentials();
 
   return (
-    <GestureHandlerRootView style={commonStyles.flex}>
-      <NavigationContainer>
-        <QueryClientProvider client={queryClient}>
-          <SafeAreaView style={commonStyles.flex}>
-            <StatusBar barStyle="dark-content" />
-            {credentials ? <StackNavigator /> : <LoginScreen />}
-          </SafeAreaView>
-        </QueryClientProvider>
-      </NavigationContainer>
-    </GestureHandlerRootView>
+    <SafeAreaProvider>
+      <GestureHandlerRootView style={commonStyles.flex}>
+        <BottomSheetModalProvider>
+          <NavigationContainer>
+            <QueryClientProvider client={queryClient}>
+              <SafeAreaView style={commonStyles.flex}>
+                <StatusBar barStyle="dark-content" />
+                {credentials ? <StackNavigator /> : <LoginScreen />}
+              </SafeAreaView>
+            </QueryClientProvider>
+          </NavigationContainer>
+        </BottomSheetModalProvider>
+      </GestureHandlerRootView>
+    </SafeAreaProvider>
   );
 }
 

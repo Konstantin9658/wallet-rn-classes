@@ -26,7 +26,7 @@ export const HomeScreen = () => {
   const [searchString, setSearchString] = useState<string>("");
   const [isFocused, setFocused] = useState<boolean>(false);
 
-  const { data: user } = useGetApiProfileMe();
+  const { data: user, refetch } = useGetApiProfileMe();
   const { data, isRefetching, isLoading } = useGetApiProfileSearch(
     { Find: searchString, Count: 10 },
     { query: { enabled: searchString.length > 1 } },
@@ -90,6 +90,7 @@ export const HomeScreen = () => {
           to: data.email,
           amount: data.amount,
         });
+        refetch();
       } catch (error) {
         console.log(error);
       } finally {
@@ -97,14 +98,14 @@ export const HomeScreen = () => {
         reset();
       }
     },
-    [enableToSend, reset],
+    [enableToSend, refetch, reset],
   );
 
   return (
     <ScreenContainer
       title="Send Mercoins"
       description="Select a user and specify the number of&nbsp;mercoins to transfer"
-      imageSrc={require("./images/i120_mercoin.png")}
+      imageSrc={require("assets/images/i120_mercoin.png")}
       ButtonComponent={
         <Button
           isLoading={isSubmitting}
