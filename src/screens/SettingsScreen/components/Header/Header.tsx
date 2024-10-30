@@ -1,4 +1,4 @@
-import { ButtonBack } from "components/ButtonBack/ButtonBack";
+import { ButtonAction } from "components/ButtonAction/ButtonAction";
 import { View, Image, Text } from "react-native";
 import { styles } from "./Header.styles";
 import { useGetApiProfileMe } from "api/backend";
@@ -14,7 +14,7 @@ export const Header = () => {
 
   return (
     <View style={styles.header}>
-      <ButtonBack style={styles.back} onPress={handleGoBack} />
+      <ButtonAction type="back" style={styles.back} onPress={handleGoBack} />
       {user?.userPhoto?.thumbnail ? (
         <View style={styles.avatarContainer}>
           <Image

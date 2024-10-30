@@ -26,6 +26,7 @@ export const styles = StyleSheet.create({
   },
   button_disabled: {
     opacity: 0.4,
+    pointerEvents: "none",
     shadowOpacity: 0,
   },
   text: {

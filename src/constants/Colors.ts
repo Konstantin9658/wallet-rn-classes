@@ -20,6 +20,8 @@ export const Colors = {
   dark90: "rgba(29, 31, 38, 0.9)",
   dark100: "rgba(29, 31, 38, 1)",
 
+  light60: "rgba(255, 255, 255, 0.6)",
+
   neutral100: "rgba(165, 174, 189, 1)",
   neutral40: "rgba(165, 174, 189, 0.4)",
   neutral20: "rgba(165, 174, 189, 0.2)",
