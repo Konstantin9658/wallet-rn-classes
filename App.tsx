@@ -12,6 +12,7 @@ import { commonStyles } from "common/styles";
 import StackNavigator from "navigators/StackNavigator/StackNavigator";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import { Toasts } from "@backpackapp-io/react-native-toast";
 if (__DEV__) {
   require("./ReactotronConfig");
 }
@@ -39,6 +40,7 @@ function App(): React.JSX.Element {
                 {credentials ? <StackNavigator /> : <LoginScreen />}
               </SafeAreaView>
             </QueryClientProvider>
+            <Toasts />
           </NavigationContainer>
         </BottomSheetModalProvider>
       </GestureHandlerRootView>

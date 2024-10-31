@@ -15,6 +15,7 @@ export const styles = StyleSheet.create({
   },
   inputContainer: { justifyContent: "center" },
   contentContainer: {
+    flex: 1,
     paddingHorizontal: 16,
     paddingVertical: 12,
   },
