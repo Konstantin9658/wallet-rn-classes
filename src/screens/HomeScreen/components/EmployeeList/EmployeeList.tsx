@@ -4,6 +4,7 @@ import { EmployeeListProps } from "./EmployeeList.types";
 import React, { forwardRef, useImperativeHandle, useRef } from "react";
 import BottomSheet, {
   BottomSheetFlatList,
+  BottomSheetModal,
   BottomSheetTextInput,
 } from "@gorhom/bottom-sheet";
 import { Separator } from "../Separator";
@@ -14,6 +15,7 @@ import { EmployeeCard } from "../EmployeeCard/EmployeeCard";
 import { commonStyles } from "common/styles";
 import { EmptyPlaceholder } from "../EmptyPlaceholder/EmptyPlaceholder";
 import ClearIcon from "assets/icons/clear-icon.svg";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export const EmployeeList = forwardRef<BottomSheet, EmployeeListProps>(
   (props, ref) => {
@@ -26,7 +28,7 @@ export const EmployeeList = forwardRef<BottomSheet, EmployeeListProps>(
       ...rest
     } = props;
 
-    const internalRef = useRef<BottomSheet>(null);
+    const internalRef = useRef<BottomSheetModal>(null);
 
     useImperativeHandle(ref, () => internalRef.current!);
 
@@ -44,17 +46,23 @@ export const EmployeeList = forwardRef<BottomSheet, EmployeeListProps>(
 
       onChange(`${item.firstName} ${item.lastName}`);
       onValueChange("email", item.email!);
+      onValueChange("to", `${item.firstName} ${item.lastName}`);
     };
+
+    const { top } = useSafeAreaInsets();
 
     const handleClearAction = () => {
       onChange("");
       onValueChange("email", "");
+      onValueChange("to", "");
     };
 
     return (
-      <BottomSheet
+      <BottomSheetModal
         ref={internalRef}
         {...rest}
+        // bottomInset={bottom}
+        topInset={top}
         snapPoints={["100%"]}
         keyboardBehavior="interactive"
         enablePanDownToClose
@@ -92,6 +100,7 @@ export const EmployeeList = forwardRef<BottomSheet, EmployeeListProps>(
         ) : (
           <BottomSheetFlatList
             data={employees}
+            // style={{ flex: 1, minHeight: "100%" }}
             keyboardShouldPersistTaps="always"
             keyboardDismissMode="on-drag"
             ListEmptyComponent={EmptyPlaceholder}
@@ -103,7 +112,7 @@ export const EmployeeList = forwardRef<BottomSheet, EmployeeListProps>(
             )}
           />
         )}
-      </BottomSheet>
+      </BottomSheetModal>
     );
   },
 );

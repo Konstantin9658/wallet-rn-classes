@@ -10,8 +10,9 @@ import {
   useGetApiProfileSearch,
 } from "api/backend";
 import { EmployeeList } from "./components/EmployeeList/EmployeeList";
-import BottomSheet from "@gorhom/bottom-sheet";
+import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { ScreenContainer } from "components/ScreenContainer/ScreenContainer";
+import { successToast } from "components/Toast/Toast";
 
 const styles = StyleSheet.create({
   input: {
@@ -51,7 +52,7 @@ export const HomeScreen = () => {
   const { email, amount } = watch();
 
   const inputRef = useRef<TextInput | null>(null);
-  const refRBSheet = useRef<BottomSheet | null>(null);
+  const refRBSheet = useRef<BottomSheetModal | null>(null);
 
   const enableToSend =
     user &&
@@ -91,6 +92,10 @@ export const HomeScreen = () => {
           amount: data.amount,
         });
         refetch();
+        successToast({
+          title: "Someone got richer!",
+          message: `${data.amount} Mercoins have been sent to ${data.to}`,
+        });
       } catch (error) {
         console.log(error);
       } finally {
@@ -102,58 +107,61 @@ export const HomeScreen = () => {
   );
 
   return (
-    <ScreenContainer
-      title="Send Mercoins"
-      description="Select a user and specify the number of&nbsp;mercoins to transfer"
-      imageSrc={require("assets/images/i120_mercoin.png")}
-      ButtonComponent={
-        <Button
-          isLoading={isSubmitting}
-          label="Send mercoins"
-          isDisabled={!enableToSend}
-          style={styles.button}
-          onPress={handleSubmit(onSubmit)}
-        />
-      }
-      BottomSheetComponent={
-        isFocused ? (
-          <EmployeeList
-            inputValue={searchString}
-            onValueChange={setValue}
-            onChange={setSearchString}
-            ref={refRBSheet}
-            isRefetching={isRefetching || isLoading}
-            employees={data}
+    <>
+      <ScreenContainer
+        title="Send Mercoins"
+        description="Select a user and specify the number of&nbsp;mercoins to transfer"
+        imageSrc={require("assets/images/i120_mercoin.png")}
+        ButtonComponent={
+          <Button
+            isLoading={isSubmitting}
+            label="Send mercoins"
+            isDisabled={!enableToSend}
+            style={styles.button}
+            onPress={handleSubmit(onSubmit)}
           />
-        ) : null
-      }>
-      <Pressable
-        onPress={() => {
-          setFocused(true);
-          refRBSheet.current?.expand();
-        }}>
-        <Input
-          ref={inputRef}
-          style={styles.input}
-          placeholder="Enter user name or E-mail"
-          value={searchString}
-        />
-      </Pressable>
-      <Controller
-        name="amount"
-        control={control}
-        render={({ field }) => (
+        }
+        BottomSheetComponent={
+          isFocused ? (
+            <EmployeeList
+              inputValue={searchString}
+              onValueChange={setValue}
+              onChange={setSearchString}
+              ref={refRBSheet}
+              isRefetching={isRefetching || isLoading}
+              employees={data}
+            />
+          ) : null
+        }>
+        <Pressable
+          onPress={() => {
+            setFocused(true);
+            refRBSheet.current?.present();
+          }}>
           <Input
-            placeholder="Amount of mercoins"
-            value={field.value === 0 ? "" : String(field.value)}
-            inputMode="numeric"
-            hasError={!!errors.amount}
-            errorMessage={errors.amount?.message}
-            keyboardType="numeric"
-            onChangeText={handleMercoinsAmountChange(field)}
+            ref={inputRef}
+            style={styles.input}
+            placeholder="Enter user name or E-mail"
+            value={searchString}
           />
-        )}
-      />
-    </ScreenContainer>
+        </Pressable>
+        <Controller
+          name="amount"
+          control={control}
+          render={({ field }) => (
+            <Input
+              placeholder="Amount of mercoins"
+              value={field.value === 0 ? "" : String(field.value)}
+              inputMode="numeric"
+              hasError={!!errors.amount}
+              errorMessage={errors.amount?.message}
+              keyboardType="numeric"
+              onChangeText={handleMercoinsAmountChange(field)}
+            />
+          )}
+        />
+      </ScreenContainer>
+      {/* <Toast /> */}
+    </>
   );
 };
